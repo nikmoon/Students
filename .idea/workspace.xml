@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6644d5e0-a4ce-48b2-9b3e-b3537c766ad6" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Models/Manager.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Models/WithID.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Managers/ManagerJournal.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Managers/ManagerLessons.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Managers/ManagerStudents.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Models/Student.java" afterPath="$PROJECT_DIR$/src/Models/Student.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/nikpack/Main.java" afterPath="$PROJECT_DIR$/src/nikpack/Main.java" />
     </list>
     <ignored path="Students.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -29,14 +24,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/nikpack/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="14" column="8" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="8" />
+            <state relative-caret-position="18">
+              <caret line="66" column="0" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1204#1211#0" expanded="true" />
+                <element signature="e#1238#1245#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -45,16 +40,18 @@
       <file leaf-file-name="Student.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Models/Student.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="11" column="52" selection-start-line="11" selection-start-column="52" selection-end-line="11" selection-end-column="52" />
+            <state relative-caret-position="306">
+              <caret line="133" column="8" selection-start-line="133" selection-start-column="8" selection-end-line="133" selection-end-column="8" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#952#953#0" expanded="true" />
+                <element signature="e#1042#1043#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Group.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Group.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Models/Group.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="576">
@@ -153,12 +150,12 @@
         <option value="$PROJECT_DIR$/src/Models/Contact.java" />
         <option value="$PROJECT_DIR$/src/Models/Journal.java" />
         <option value="$PROJECT_DIR$/src/Models/Lesson.java" />
-        <option value="$PROJECT_DIR$/src/nikpack/Main.java" />
         <option value="$PROJECT_DIR$/src/Managers/ManagerStudents.java" />
         <option value="$PROJECT_DIR$/src/Managers/ManagerLessons.java" />
-        <option value="$PROJECT_DIR$/src/Models/Student.java" />
         <option value="$PROJECT_DIR$/src/Models/WithID.java" />
         <option value="$PROJECT_DIR$/src/Models/Manager.java" />
+        <option value="$PROJECT_DIR$/src/Models/Student.java" />
+        <option value="$PROJECT_DIR$/src/nikpack/Main.java" />
       </list>
     </option>
   </component>
@@ -523,7 +520,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32884902" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32884902" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32884902" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -568,7 +565,7 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1204#1211#0" expanded="true" />
+            <element signature="e#1238#1245#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -579,6 +576,8 @@
           <caret line="10" column="45" selection-start-line="10" selection-start-column="45" selection-end-line="10" selection-end-column="45" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#952#953#0" expanded="true" />
+            <element signature="e#1042#1043#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -655,7 +654,7 @@
           <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1204#1211#0" expanded="true" />
+            <element signature="e#1238#1245#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -666,6 +665,8 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#952#953#0" expanded="true" />
+            <element signature="e#1042#1043#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -776,17 +777,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/nikpack/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="14" column="8" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="8" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1204#1211#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Managers/ManagerJournal.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -827,16 +817,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Models/Student.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="11" column="52" selection-start-line="11" selection-start-column="52" selection-end-line="11" selection-end-column="52" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Models/Manager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="486">
@@ -871,6 +851,29 @@
           <caret line="34" column="13" selection-start-line="34" selection-start-column="13" selection-end-line="34" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Models/Student.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="133" column="8" selection-start-line="133" selection-start-column="8" selection-end-line="133" selection-end-column="8" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#952#953#0" expanded="true" />
+            <element signature="e#1042#1043#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/nikpack/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="66" column="0" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1238#1245#0" expanded="true" />
           </folding>
         </state>
       </provider>

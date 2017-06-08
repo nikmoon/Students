@@ -10,9 +10,11 @@ import java.util.*;
 
 public class Main {
 
+    public static int index = 0;
+
     public static void main(String[] args) {
-        //testSerialization();
-        testJournal();
+        testSerialization();
+        //testJournal();
         //System.out.println(new GregorianCalendar(2017, Calendar.JANUARY, 1).get(Calendar.YEAR));
     }
 
@@ -55,6 +57,8 @@ public class Main {
         List<Student> students = new ArrayList<>();
         students.add(new Student("Вася", "Васильевич", "Пупкин", new GregorianCalendar(2017, 5, 5)));
         students.add(new Student("Петя", "Петрович", "Попов", new GregorianCalendar(2017, 6, 6)));
+
+        Main.index = 0;
 
         // сериализуем в файл
         serializeStudents(students, "test.txt");

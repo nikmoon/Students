@@ -1,6 +1,8 @@
 package Models;
 
-import java.io.Serializable;
+import nikpack.Main;
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -9,7 +11,7 @@ import java.util.List;
 /**
  * Created by sa on 08.06.17.
  */
-public class Student implements Serializable, WithID {
+public class Student implements Externalizable, WithID {
     private String firstName;
     private String surname;
     private String secondName;
@@ -18,6 +20,10 @@ public class Student implements Serializable, WithID {
     private Long groupID;
     private Group group;
     private List<Contact> contacts;
+
+    public Student() {
+
+    }
 
     public Student(String firstName, String surname, String secondName, Calendar dateOfBirth) {
         this.firstName = firstName;
@@ -110,4 +116,21 @@ public class Student implements Serializable, WithID {
     }
 
 
+    @Override
+    public void writeExternal(ObjectOutput out) throws IOException {
+        out.writeObject(firstName);
+        out.writeObject(surname);
+        out.writeObject(secondName);
+        out.writeObject(id);
+        out.writeInt(Main.index++);
+    }
+
+    @Override
+    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+        firstName = (String) in.readObject();
+        surname = (String) in.readObject();
+        secondName = (String) in.readObject();
+        id = (Long) in.readObject();
+        in.readInt();
+    }
 }
