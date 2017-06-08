@@ -1,5 +1,6 @@
 package Models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -7,7 +8,7 @@ import java.util.List;
 /**
  * Created by sa on 08.06.17.
  */
-public class Student {
+public class Student implements Serializable {
     private String firstName;
     private String surname;
     private String secondName;
