@@ -10,8 +10,8 @@ public class Contact {
 
 
     public Contact(ContactType contactType, String value) {
-
         this.contactType = contactType;
+        this.value = value;
     }
 
     @Override
@@ -28,9 +28,7 @@ public class Contact {
 
     @Override
     public int hashCode() {
-        int result = contactType.hashCode();
-        result = (41 * result + 21) + (41 * value.hashCode() + 21);
-        return result;
+        return (41 * contactType.hashCode() + 21) + (41 * value.hashCode() + 21);
     }
 
     public ContactType getContactType() {

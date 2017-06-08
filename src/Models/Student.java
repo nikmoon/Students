@@ -2,6 +2,7 @@ package Models;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -12,19 +13,24 @@ public class Student implements Serializable {
     private String firstName;
     private String surname;
     private String secondName;
-    private Date dateOfBirth;
+    private Calendar dateOfBirth;
     private Long id;
     private Long groupID;
     private Group group;
     private List<Contact> contacts;
 
-    public Student(String firstName, String surname, String secondName, Date dateOfBirth) {
+    public Student(String firstName, String surname, String secondName, Calendar dateOfBirth) {
         this.firstName = firstName;
         this.surname = surname;
         this.secondName = secondName;
         this.dateOfBirth = dateOfBirth;
-        this.id = System.currentTimeMillis();
+        this.id = System.currentTimeMillis() + this.firstName.hashCode() + this.surname.hashCode();
         this.contacts = new ArrayList<>();
+    }
+
+    @Override
+    public String toString() {
+        return id.toString() + ": " + firstName + " " + surname + " " + secondName + " " + dateOfBirth;
     }
 
     @Override
@@ -67,20 +73,16 @@ public class Student implements Serializable {
         this.secondName = secondName;
     }
 
-    public Date getDateOfBirth() {
+    public Calendar getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(Calendar dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Long getGroupID() {

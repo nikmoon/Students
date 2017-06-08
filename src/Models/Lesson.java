@@ -1,5 +1,6 @@
 package Models;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -10,15 +11,16 @@ public class Lesson {
 
     private Long id;
     private String name;
-    private Date date;
+    private Calendar date;
     private Integer duration;
     private String room;
     private String description;
     private String subject; //  тема лекции
     private String lector;
     private List<Group> groups;
+    private Journal journal;
 
-    public Lesson(String name, Date date, Integer duration, String room, String description, String subject, String lector, List<Group> groups) {
+    public Lesson(String name, Calendar date, Integer duration, String room, String description, String subject, String lector, List<Group> groups) {
         this.id = System.currentTimeMillis();
         this.name = name;
         this.date = date;
@@ -28,6 +30,7 @@ public class Lesson {
         this.subject = subject;
         this.lector = lector;
         this.groups = groups;
+        this.journal = new Journal(this);
     }
 
     @Override
@@ -52,11 +55,11 @@ public class Lesson {
         this.name = name;
     }
 
-    public Date getDate() {
+    public Calendar getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(Calendar date) {
         this.date = date;
     }
 
@@ -106,5 +109,9 @@ public class Lesson {
 
     public void setGroups(List<Group> groups) {
         this.groups = groups;
+    }
+
+    public Journal getJournal() {
+        return journal;
     }
 }
