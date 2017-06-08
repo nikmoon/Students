@@ -30,7 +30,7 @@ public class Student implements Serializable {
 
     @Override
     public String toString() {
-        return id.toString() + ": " + firstName + " " + surname + " " + secondName + " " + dateOfBirth;
+        return id.toString() + ": " + firstName + " " + surname + " " + secondName;
     }
 
     @Override

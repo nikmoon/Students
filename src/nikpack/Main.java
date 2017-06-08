@@ -12,8 +12,8 @@ public class Main {
 
     public static void main(String[] args) {
         //testSerialization();
-        //testJournal();
-        System.out.println(new GregorianCalendar(2017, Calendar.JANUARY, 1).get(Calendar.YEAR));
+        testJournal();
+        //System.out.println(new GregorianCalendar(2017, Calendar.JANUARY, 1).get(Calendar.YEAR));
     }
 
     static void testJournal() {
