@@ -11,6 +11,7 @@ import java.util.List;
 /**
  * Created by sa on 08.06.17.
  */
+@Deprecated
 public class Student implements Externalizable, WithID {
     private String firstName;
     private String surname;
