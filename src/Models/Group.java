@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by sa on 08.06.17.
  */
-public class Group implements Iterable<Student> {
+public class Group implements Iterable<Student>, WithID {
 
     private String name;
     private Long id;
