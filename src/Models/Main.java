@@ -12,7 +12,7 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) {
-        XMLNode studentNode = XMLNode.createNode(nikpack.Main.students[0]);
+        XMLNode studentNode = XMLNode.createInstanceNode(nikpack.Main.students[0]);
         System.out.println(studentNode);
     }
 
@@ -62,9 +62,9 @@ class XMLNode {
     private static int offsetStep = 4;
 
 
-    public static XMLNode createNode(Object obj, String nodeName) {
+    public static XMLNode createInstanceNode(Object obj, String nodeName) {
         Class cl = obj.getClass();
-        System.out.println(cl.getName());
+
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
@@ -77,23 +77,23 @@ class XMLNode {
         for(Field field: cl.getDeclaredFields()) {
             try {
                 System.out.println(field.getName());
-                node.addNode(XMLNode.createField(field, obj));
+                node.addNode(XMLNode.createFieldNode(field, obj));
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }
         }
 //
 //        for(Method method: cl.getDeclaredMethods()) {
-//            node.addNode(XMLNode.createMethod(method));
+//            node.addNode(XMLNode.createMethodNode(method));
 //        }
         return node;
     }
 
-    public static XMLNode createNode(Object obj) {
-        return createNode(obj, "object");
+    public static XMLNode createInstanceNode(Object obj) {
+        return createInstanceNode(obj, "object");
     }
 
-    public static XMLNode createMethod(Method method) {
+    public static XMLNode createMethodNode(Method method) {
         method.setAccessible(true);
         XMLNode node = new XMLNode("method");
 
@@ -112,7 +112,11 @@ class XMLNode {
         return node;
     }
 
-    public static XMLNode createField(Field field, Object obj) throws IllegalAccessException {
+    public static XMLNode createClassNode(Class cl) {
+
+    }
+
+    public static XMLNode createFieldNode(Field field, Object obj) throws IllegalAccessException {
         field.setAccessible(true);
         XMLNode node = new XMLNode("field");
 
@@ -124,8 +128,8 @@ class XMLNode {
         node.addArgument("id", field.getName());
         node.addArgument("value", fieldValue);
 
-        if (fieldType.equals("Models.Student$GenderType")) {
-            node.addNode(createNode(value, fieldType));
+        if (fieldType.startsWith("Models.")) {
+            node.addNode(createClassNode(value.getClass()));
         }
 
         return node;
