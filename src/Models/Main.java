@@ -1,5 +1,6 @@
 package Models;
 
+import java.io.FileOutputStream;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -12,7 +13,14 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) {
-        XMLNode studentNode = XMLNode.createInstanceNode(nikpack.Main.students[0]);
+        XMLNode studentNode = null;
+        try {
+            studentNode = XMLNode.createNodeRecursive(nikpack.Main.students[0]);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         System.out.println(studentNode);
     }
 
@@ -55,99 +63,99 @@ public class Main {
 
 
 class XMLNode {
+    private NodeType nodeType;
     private String name;
     private Map<String, String> arguments;
     private List<XMLNode> nodes;
 
     private static int offsetStep = 4;
 
+    private enum NodeType { CLASS, OBJECT, FIELD, METHOD, PARAM }
 
-    public static XMLNode createInstanceNode(Object obj, String nodeName) {
-        Class cl = obj.getClass();
 
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        XMLNode node = new XMLNode(nodeName.replace("Models.", ""));
-        node.addArgument("type", cl.getName().replace("Models.", ""));
-
-        for(Field field: cl.getDeclaredFields()) {
-            try {
-                System.out.println(field.getName());
-                node.addNode(XMLNode.createFieldNode(field, obj));
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
+    public static XMLNode createNodeRecursive(Object obj) throws IllegalAccessException, InterruptedException {
+        XMLNode node;
+        if (obj instanceof Class) {
+            node = new XMLNode(NodeType.CLASS);
+            Class cl = (Class) obj;
+            node.addArgument("id", cl.getName());
+            for(Field field: cl.getDeclaredFields()) {
+                field.setAccessible(true);
+                XMLNode fieldNode;
+                if (cl != field.getType()) {
+                    fieldNode = createNodeRecursive(field);
+                }
+                else {
+                    fieldNode = new XMLNode(NodeType.FIELD);
+                    fieldNode.addArgument("type", field.getType().getName());
+                    fieldNode.addArgument("id", field.getName());
+                }
+                node.addNode(fieldNode);
             }
         }
-//
-//        for(Method method: cl.getDeclaredMethods()) {
-//            node.addNode(XMLNode.createMethodNode(method));
-//        }
-        return node;
-    }
+        else if (obj instanceof Field) {
+            node = new XMLNode(NodeType.FIELD);
+            Field field = (Field) obj;
+            node.addArgument("type", field.getType().getName());
+            node.addArgument("id", field.getName());
+            if (field.getType().getName().startsWith("Models.")) {
+                XMLNode classNode = createNodeRecursive(field.getType());
+                node.addNode(classNode);
+            }
+        }
+        else if (obj instanceof Method) {
+            node = new XMLNode(NodeType.METHOD);
+            Method method = (Method) obj;
+            node.addArgument("id", method.getName());
+            node.addArgument("return", method.getReturnType().getName());
+            Parameter[] parameters = method.getParameters();
+            if (parameters.length > 0) {
+                for (Parameter param : parameters) {
+                    XMLNode paramNode = createNodeRecursive(param);
+                    node.addNode(paramNode);
+                }
+            }
+        }
+        else if (obj instanceof Parameter) {
+            node = new XMLNode(NodeType.PARAM);
+            Parameter param = (Parameter) obj;
+            node.addArgument("type", param.getType().getName());
+            node.addArgument("id", param.getName());
 
-    public static XMLNode createInstanceNode(Object obj) {
-        return createInstanceNode(obj, "object");
-    }
-
-    public static XMLNode createMethodNode(Method method) {
-        method.setAccessible(true);
-        XMLNode node = new XMLNode("method");
-
-        node.addArgument("id", method.getName());
-        node.addArgument("return", method.getReturnType().getName());
-
-        Parameter[] parameters = method.getParameters();
-        if (parameters.length > 0) {
-            for (Parameter param : parameters) {
-                XMLNode paramNode = new XMLNode("arg");
-                paramNode.addArgument("type", param.getType().getName());
-                paramNode.addArgument("id", param.getName());
-                node.addNode(paramNode);
+        }
+        else {
+            node = new XMLNode(NodeType.OBJECT);
+            node.addArgument("type", obj.getClass().getName());
+            for(Field field: obj.getClass().getDeclaredFields()) {
+                field.setAccessible(true);
+                XMLNode fieldNode = createNodeRecursive(field);
+                fieldNode.addArgument("value", String.valueOf(field.get(obj)));
+                node.addNode(fieldNode);
+            }
+            for(Method method: obj.getClass().getDeclaredMethods()) {
+                method.setAccessible(true);
+                XMLNode methodNode = createNodeRecursive(method);
+                node.addNode(methodNode);
             }
         }
         return node;
     }
 
-    public static XMLNode createClassNode(Class cl) {
-
-    }
-
-    public static XMLNode createFieldNode(Field field, Object obj) throws IllegalAccessException {
-        field.setAccessible(true);
-        XMLNode node = new XMLNode("field");
-
-        String fieldType = field.getType().getName();
-        Object value = field.get(obj);
-        String fieldValue = value == null ? "null" : value.toString().replaceAll("\"", "\\\"");
-
-        node.addArgument("type", fieldType);
-        node.addArgument("id", field.getName());
-        node.addArgument("value", fieldValue);
-
-        if (fieldType.startsWith("Models.")) {
-            node.addNode(createClassNode(value.getClass()));
-        }
-
-        return node;
-    }
-
-    public XMLNode(String name) {
-        this.name = name;
+    private XMLNode(NodeType nodeType) {
+        this.nodeType = nodeType;
+        this.name = nodeType.name().toLowerCase();
         arguments = new HashMap<>();
         nodes = new ArrayList<>();
     }
 
-    public void addArgument(String name, String value) {
+    private void addArgument(String name, String value) {
         arguments.put(name, value);
     }
 
-    public void addNode(XMLNode node) {
+    private void addNode(XMLNode node) {
         nodes.add(node);
     }
+
 
     public String serialize(int offset) {
 

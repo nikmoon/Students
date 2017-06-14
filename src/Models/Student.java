@@ -82,7 +82,7 @@ public class Student implements Externalizable {
 
     @Override
     public boolean equals(Object obj) {
-        return obj != null && hashCode() == obj.hashCode();
+        return obj != null && obj.getClass() == this.getClass() && hashCode() == obj.hashCode();
     }
 
     @Override
