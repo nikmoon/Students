@@ -3,7 +3,6 @@ package Models;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
 import java.lang.reflect.Parameter;
 import java.util.*;
 
@@ -13,18 +12,12 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) {
-        Student student = new Student("Connor", "Reese", "John", new GregorianCalendar());
-        student.setGroup(new Group("История"));
-
-        XMLNode studentNode = XMLNode.createNode(student);
+        XMLNode studentNode = XMLNode.createNode(nikpack.Main.students[0]);
         System.out.println(studentNode);
     }
 
     public static void testReflection() throws NoSuchFieldException, IllegalAccessException {
-        Student student = new Student("Connor", "Reese", "John", new GregorianCalendar());
-
-
-
+        Student student = nikpack.Main.students[0];
 
         for (Field field: student.getClass().getDeclaredFields()) {
             System.out.println(field.getName() + " " + field.getType().toString());
@@ -68,27 +61,35 @@ class XMLNode {
 
     private static int offsetStep = 4;
 
-    public static XMLNode createNode(WithID obj, String nodeName) {
-        Class<? extends WithID> cl = obj.getClass();
+
+    public static XMLNode createNode(Object obj, String nodeName) {
+        Class cl = obj.getClass();
+        System.out.println(cl.getName());
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         XMLNode node = new XMLNode(nodeName.replace("Models.", ""));
         node.addArgument("type", cl.getName().replace("Models.", ""));
 
         for(Field field: cl.getDeclaredFields()) {
             try {
+                System.out.println(field.getName());
                 node.addNode(XMLNode.createField(field, obj));
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }
         }
-
-        for(Method method: cl.getDeclaredMethods()) {
-            node.addNode(XMLNode.createMethod(method));
-        }
+//
+//        for(Method method: cl.getDeclaredMethods()) {
+//            node.addNode(XMLNode.createMethod(method));
+//        }
         return node;
     }
 
-    public static XMLNode createNode(WithID obj) {
+    public static XMLNode createNode(Object obj) {
         return createNode(obj, "object");
     }
 
@@ -111,7 +112,7 @@ class XMLNode {
         return node;
     }
 
-    public static XMLNode createField(Field field, WithID obj) throws IllegalAccessException {
+    public static XMLNode createField(Field field, Object obj) throws IllegalAccessException {
         field.setAccessible(true);
         XMLNode node = new XMLNode("field");
 
@@ -123,10 +124,9 @@ class XMLNode {
         node.addArgument("id", field.getName());
         node.addArgument("value", fieldValue);
 
-        if (value != null)
-            if (fieldType.startsWith("Models.")) {
-                node.addNode(createNode((WithID) value, fieldType));
-            }
+        if (fieldType.equals("Models.Student$GenderType")) {
+            node.addNode(createNode(value, fieldType));
+        }
 
         return node;
     }

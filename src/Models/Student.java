@@ -1,59 +1,121 @@
 package Models;
 
-import nikpack.Main;
-
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 /**
- * Created by sa on 08.06.17.
+ * Created by nikbird on 13.06.2017.
  */
-@Deprecated
-public class Student implements Externalizable, WithID {
-    private String firstName;
-    private String surname;
-    private String secondName;
-    private Calendar dateOfBirth;
-    private Long id;
-    private Long groupID;
-    private Group group;
-    private List<Contact> contacts;
+public class Student implements Externalizable {
+
+    private GenderType gender;          // пол
+    private String firstName;           // имя
+    private String lastName;            // фамилия
+    private String middleName;          // отчество
+    private BirthDate birthDate;        // дата рождения
+    private List<Contact> contacts;     // контакты
+    private String groupName;           // название группы
+    private String passportNum;         // серия и номер паспорта
+
+
+    /**
+     * Возможные варианты пола студента
+     */
+    public enum GenderType { MALE, FEMALE };
+
+    /**
+     * Класс для хранения даты рождения
+     */
+    public static class BirthDate implements Serializable {
+        private int year;
+        private int month;
+        private int day;
+
+        public BirthDate(int year, int month, int day) {
+            this.year = year;
+            this.month = month;
+            this.day = day;
+        }
+
+        @Override
+        public int hashCode() {
+            int result = 37 + year;
+            result = 37 * result + month;
+            result = 37 * result + day;
+            return result;
+        }
+    }
+
+    /**
+     * Основной конструктор
+     *
+     * @param gender
+     * @param firstName
+     * @param lastName
+     * @param middleName
+     * @param birthDate
+     * @param contacts
+     * @param groupName
+     * @param passportNum
+     */
+    public Student(GenderType gender, String firstName, String lastName,
+                   String middleName, BirthDate birthDate, List<Contact> contacts,
+                   String groupName, String passportNum) {
+        this.gender = gender;
+        this.firstName = firstName.trim();
+        this.lastName = lastName.trim();
+        this.middleName = middleName.trim();
+        this.birthDate = birthDate;
+        this.contacts = contacts;
+        this.groupName = groupName;
+        this.passportNum = passportNum.replace(" ", "");
+    }
 
     public Student() {
 
     }
 
-    public Student(String firstName, String surname, String secondName, Calendar dateOfBirth) {
-        this.firstName = firstName;
-        this.surname = surname;
-        this.secondName = secondName;
-        this.dateOfBirth = dateOfBirth;
-        this.id = System.currentTimeMillis() + this.firstName.hashCode() + this.surname.hashCode();
-        this.contacts = new ArrayList<>();
-    }
-
-    @Override
-    public String toString() {
-        return id.toString() + ": " + firstName + " " + surname + " " + secondName;
-    }
-
     @Override
     public int hashCode() {
-        return (int)(21 + id * 42);
+        return passportNum.hashCode();
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == null)
-            return false;
+        return obj != null && hashCode() == obj.hashCode();
+    }
 
-        if (!(obj instanceof Student))
-            return false;
+    @Override
+    public void writeExternal(ObjectOutput out) throws IOException {
+        out.writeObject(gender);
+        out.writeObject(firstName);
+        out.writeObject(lastName);
+        out.writeObject(middleName);
+        out.writeObject(birthDate);
+        out.writeObject(contacts);
+        out.writeObject(groupName);
+        out.writeObject(passportNum);
+    }
 
-        return (this.id == ((Student)obj).getId());
+    @SuppressWarnings("unchecked")
+    @Override
+    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+        gender = (GenderType) in.readObject();
+        firstName = (String) in.readObject();
+        lastName = (String) in.readObject();
+        middleName = (String) in.readObject();
+        birthDate = (BirthDate) in.readObject();
+        contacts = (List<Contact>) in.readObject();
+        groupName = (String) in.readObject();
+        passportNum = (String) in.readObject();
+    }
+
+    public GenderType getGender() {
+        return gender;
+    }
+
+    public void setGender(GenderType gender) {
+        this.gender = gender;
     }
 
     public String getFirstName() {
@@ -64,74 +126,47 @@ public class Student implements Externalizable, WithID {
         this.firstName = firstName;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public String getSecondName() {
-        return secondName;
+    public String getMiddleName() {
+        return middleName;
     }
 
-    public void setSecondName(String secondName) {
-        this.secondName = secondName;
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
     }
 
-    public Calendar getDateOfBirth() {
-        return dateOfBirth;
+    public BirthDate getBirthDate() {
+        return birthDate;
     }
 
-    public void setDateOfBirth(Calendar dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public Long getGroupID() {
-        return groupID;
-    }
-
-    public void setGroupID(Long groupID) {
-        this.groupID = groupID;
-    }
-
-    public Group getGroup() {
-        return group;
-    }
-
-    public void setGroup(Group group) {
-        this.group = group;
+    public void setBirthDate(BirthDate birthDate) {
+        this.birthDate = birthDate;
     }
 
     public List<Contact> getContacts() {
         return contacts;
     }
 
-    public void setContacts(List<Contact> contacts) {
-        this.contacts = contacts;
+    public String getGroupName() {
+        return groupName;
     }
 
-
-    @Override
-    public void writeExternal(ObjectOutput out) throws IOException {
-        out.writeObject(firstName);
-        out.writeObject(surname);
-        out.writeObject(secondName);
-        out.writeObject(id);
-        out.writeInt(Main.index++);
+    protected void setGroupName(String groupName) {
+        this.groupName = groupName;
     }
 
-    @Override
-    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
-        firstName = (String) in.readObject();
-        surname = (String) in.readObject();
-        secondName = (String) in.readObject();
-        id = (Long) in.readObject();
-        in.readInt();
+    public String getPassportNum() {
+        return passportNum;
+    }
+
+    protected void setPassportNum(String passportNum) {
+        this.passportNum = passportNum;
     }
 }

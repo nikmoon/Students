@@ -1,9 +1,6 @@
 package nikpack;
 
-import Models.Group;
-import Models.Journal;
-import Models.Lesson;
-import Models.Student;
+import Models.*;
 
 import java.io.*;
 import java.util.*;
@@ -12,89 +9,64 @@ public class Main {
 
     public static int index = 0;
 
+    public static Student[] students = {
+            new Student(Student.GenderType.MALE, "Григорий", "Распутин",
+                    "Ефимович", new Student.BirthDate(1869, 1, 21),
+                    new ArrayList<>(), "Пд-11", "7300 567682"),
+            new Student(Student.GenderType.MALE, "Александр", "Бородач", "Родионович",
+                    new Student.BirthDate(1985, 12, 1), new ArrayList<>(), "Пд-12", "7300 580680")
+    };
+
+    public static class ManagedStudent extends Student {
+        @Override
+        public void setPassportNum(String passportNum) {
+            super.setPassportNum(passportNum);
+        }
+    }
+
     public static void main(String[] args) {
-        testSerialization();
-        //testJournal();
         //System.out.println(new GregorianCalendar(2017, Calendar.JANUARY, 1).get(Calendar.YEAR));
     }
 
-    static void testJournal() {
-        Student[] students = {
-                new Student("Александр", "Родионович", "Бородач", new GregorianCalendar(1985, Calendar.DECEMBER, 1)),
-                new Student("Владимир", "Ильич", "Ленин", new GregorianCalendar(1870, Calendar.APRIL, 23)),
-                new Student("Фёдор", "Иванович", "Шаляпин", new GregorianCalendar(1873, Calendar.FEBRUARY, 1)),
-                new Student("Никита-царь", "Сергеевич", "Мигалков", new GregorianCalendar(1945, Calendar.OCTOBER, 21))
-        };
-        Group groupA = new Group("Программисты");
-        groupA.addStudent(students[0]);
-        groupA.addStudent(students[1]);
+    static void testSerialization(Student student) {
+        System.out.println(student.hashCode());
+        serializeToFile(student, "test.txt");
+        Student newStudent = (Student) deserializeFromFile("test.txt");
+        System.out.println(newStudent.hashCode());
+    }
 
-        Group groupB = new Group("Филологи");
-        groupB.addStudent(students[2]);
-        groupB.addStudent(students[3]);
-
-        List<Group> groups = new ArrayList<Group>();
-        groups.add(groupA);
-        groups.add(groupB);
-        Lesson lesson = new Lesson("История", new GregorianCalendar(2017, Calendar.JUNE, 9, 10, 30), 1,
-                "501", "Лекция о истории", "Древняя Русь", "Пушкин А.С.", groups);
-
-        Journal journal = lesson.getJournal();
-        journal.setPresence(students[0]);
-
-        System.out.println("Были на лекции:");
-        for(Student student: journal.wasOnLesson()) {
-            System.out.println(student);
-        }
-
-        System.out.println("Отсутствовали на лекции");
-        for(Student student: journal.missOnLesson()) {
-            System.out.println(student);
+    static void serializeToFile(Object obj, String fileName) {
+        try (
+                OutputStream fileStream = new FileOutputStream(fileName);
+                ObjectOutput out = new ObjectOutputStream(fileStream);
+        ) {
+            out.writeObject(obj);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            System.exit(-1);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(-1);
         }
     }
 
-    static void testSerialization() {
-        List<Student> students = new ArrayList<>();
-        students.add(new Student("Вася", "Васильевич", "Пупкин", new GregorianCalendar(2017, 5, 5)));
-        students.add(new Student("Петя", "Петрович", "Попов", new GregorianCalendar(2017, 6, 6)));
-
-        Main.index = 0;
-
-        // сериализуем в файл
-        serializeStudents(students, "test.txt");
-        // десериализуем из файла
-        List<Student> newStudents = deserializeStudents("test.txt");
-
-        for(Student student: newStudents) {
-            System.out.println(student);
+    static Object deserializeFromFile(String fileName) {
+        Object obj = null;
+        try (
+                InputStream fileStream = new FileInputStream(fileName);
+                ObjectInput in = new ObjectInputStream(fileStream);
+        ) {
+            obj = in.readObject();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            System.exit(-1);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(-1);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            System.exit(-1);
         }
-    }
-
-    static void serializeStudents(List<Student> students, String fileName) {
-        try (FileOutputStream fout = new FileOutputStream(fileName);
-            ObjectOutputStream oout = new ObjectOutputStream(fout)) {
-
-            oout.writeObject(students);
-
-        } catch (IOException ex) {
-
-        }
-
-    }
-
-    static List<Student> deserializeStudents(String fileName) {
-        List<Student> students = null;
-        try (FileInputStream fin = new FileInputStream(fileName);
-            ObjectInputStream oin = new ObjectInputStream(fin)) {
-
-            students = (List<Student>) oin.readObject();
-        }
-        catch (IOException ex) {
-
-        }
-        catch (ClassNotFoundException ex) {
-
-        }
-        return students;
+        return obj;
     }
 }
