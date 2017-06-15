@@ -1,8 +1,4 @@
-package Models;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+package nikpack.Students.Models;
 
 /**
  * Created by sa on 08.06.17.

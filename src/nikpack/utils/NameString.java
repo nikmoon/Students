@@ -1,4 +1,4 @@
-package MyUtils;
+package nikpack.utils;
 
 /**
  * Created by sa on 15.06.17.

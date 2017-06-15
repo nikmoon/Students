@@ -1,9 +1,9 @@
-package Models;
+package nikpack.Students.Models;
 
-import Interfaces.IStudent;
-import MyUtils.Contacts;
-import MyUtils.DayDate;
-import MyUtils.NameString;
+import nikpack.Students.Interfaces.IStudent;
+import nikpack.utils.Contacts;
+import nikpack.utils.DayDate;
+import nikpack.utils.NameString;
 
 import java.io.*;
 
@@ -100,6 +100,11 @@ public class Student implements IStudent, Externalizable {
     @Override
     public GenderType getGender() {
         return gender;
+    }
+
+    @Override
+    public String getFullName() {
+        return String.join(" ", getFirstName(), getMiddleName(), getLastName());
     }
 
     @Override

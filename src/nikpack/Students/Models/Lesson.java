@@ -1,7 +1,7 @@
-package Models;
+package nikpack.Students.Models;
 
-import Interfaces.ILesson;
-import MyUtils.NameString;
+import nikpack.Students.Interfaces.ILesson;
+import nikpack.utils.NameString;
 
 import java.util.Date;
 

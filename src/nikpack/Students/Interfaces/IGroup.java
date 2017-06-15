@@ -1,6 +1,4 @@
-package Interfaces;
-
-import java.util.List;
+package nikpack.Students.Interfaces;
 
 /**
  * Created by sa on 08.06.17.

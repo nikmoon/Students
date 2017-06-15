@@ -1,6 +1,6 @@
-package Interfaces;
+package nikpack.Students.Interfaces;
 
-import Models.Lesson;
+import nikpack.Students.Models.Lesson;
 
 import java.util.Date;
 

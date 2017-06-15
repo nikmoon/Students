@@ -1,4 +1,4 @@
-package Interfaces;
+package nikpack.Students.Interfaces;
 
 /**
  * Created by sa on 15.06.17.

@@ -1,4 +1,4 @@
-package MyUtils;
+package nikpack.utils;
 
 import java.io.Serializable;
 

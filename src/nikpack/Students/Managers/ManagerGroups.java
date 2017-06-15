@@ -1,6 +1,6 @@
-package Managers;
+package nikpack.Students.Managers;
 
-import Models.Group;
+import nikpack.Students.Models.Group;
 
 import java.util.Set;
 

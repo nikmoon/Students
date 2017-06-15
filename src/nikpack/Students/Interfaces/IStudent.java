@@ -1,9 +1,9 @@
-package Interfaces;
+package nikpack.Students.Interfaces;
 
-import MyUtils.Contacts;
-import Models.Group;
-import Models.Student;
-import MyUtils.DayDate;
+import nikpack.utils.Contacts;
+import nikpack.Students.Models.Group;
+import nikpack.Students.Models.Student;
+import nikpack.utils.DayDate;
 
 /**
  * Created by nikbird on 13.06.2017.
@@ -11,6 +11,7 @@ import MyUtils.DayDate;
 
 public interface IStudent {
     Student.GenderType getGender();
+    String getFullName();
     String getFirstName();
     String getLastName();
     String getMiddleName();

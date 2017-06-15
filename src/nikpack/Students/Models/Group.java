@@ -1,9 +1,9 @@
-package Models;
+package nikpack.Students.Models;
 
-import Interfaces.IGroup;
-import Interfaces.IStudent;
-import MyUtils.NameString;
-import MyUtils.Utils;
+import nikpack.Students.Interfaces.IGroup;
+import nikpack.Students.Interfaces.IStudent;
+import nikpack.utils.NameString;
+import nikpack.utils.Utils;
 
 import java.util.*;
 
