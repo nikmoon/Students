@@ -1,117 +1,128 @@
 package Models;
 
-import java.util.Calendar;
+import Interfaces.ILesson;
+import MyUtils.NameString;
+
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by sa on 08.06.17.
+ *
+ * Учебное занятие
  */
-public class Lesson {
+public class Lesson implements ILesson {
 
-//    private Long id;
-//    private String name;
-//    private Calendar date;
-//    private Integer duration;
-//    private String room;
-//    private String description;
-//    private String subject; //  тема лекции
-//    private String lector;
-//    private List<Group> groups;
-//    private Journal journal;
-//
-//    public Lesson(String name, Calendar date, Integer duration, String room, String description, String subject, String lector, List<Group> groups) {
-//        this.id = System.currentTimeMillis();
-//        this.name = name;
-//        this.date = date;
-//        this.duration = duration;
-//        this.room = room;
-//        this.description = description;
-//        this.subject = subject;
-//        this.lector = lector;
-//        this.groups = groups;
-//        this.journal = new Journal(this);
-//    }
-//
-//    @Override
-//    public boolean equals(Object o) {
-//        if (o == null) return false;
-//        if (!(o instanceof Lesson)) return false;
-//
-//        Lesson lesson = (Lesson) o;
-//        return (lesson.id == id);
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        return (int)(id * 41 + 21);
-//    }
-//
-//    public String getName() {
-//        return name;
-//    }
-//
-//    public void setName(String name) {
-//        this.name = name;
-//    }
-//
-//    public Calendar getDate() {
-//        return date;
-//    }
-//
-//    public void setDate(Calendar date) {
-//        this.date = date;
-//    }
-//
-//    public Integer getDuration() {
-//        return duration;
-//    }
-//
-//    public void setDuration(Integer duration) {
-//        this.duration = duration;
-//    }
-//
-//    public String getRoom() {
-//        return room;
-//    }
-//
-//    public void setRoom(String room) {
-//        this.room = room;
-//    }
-//
-//    public String getDescription() {
-//        return description;
-//    }
-//
-//    public void setDescription(String description) {
-//        this.description = description;
-//    }
-//
-//    public String getSubject() {
-//        return subject;
-//    }
-//
-//    public void setSubject(String subject) {
-//        this.subject = subject;
-//    }
-//
-//    public String getLector() {
-//        return lector;
-//    }
-//
-//    public void setLector(String lector) {
-//        this.lector = lector;
-//    }
-//
-//    public List<Group> getGroups() {
-//        return groups;
-//    }
-//
-//    public void setGroups(List<Group> groups) {
-//        this.groups = groups;
-//    }
-//
-//    public Journal getJournal() {
-//        return journal;
-//    }
+    private LessonType type;            // тип занятия
+    private LessonSubject subject;      // название предмета
+    private NameString theme;               // тема занятия
+    private NameString teacher;             // преподаватель
+    private Date date;                  // дата занятия
+    private int length;             // продолжительность в минутах
+
+
+    /**
+     * Типы занятий
+     */
+    public enum LessonType {
+        LECTURE,                // лекция
+        PRACTICE                // практика
+    }
+
+    /**
+     * Названия предметов
+     */
+    public enum LessonSubject {
+        RUSSIAN_LANG("Русский язык"),
+        MATHEMATICS("Математика"),
+        PHYSICS("Физика");
+
+        private String name;
+
+        LessonSubject(String name) {
+            this.name = name;
+        }
+
+        @Override
+        public String toString() {
+            return name;
+        }
+    }
+
+    public Lesson(LessonType type, LessonSubject subject, NameString theme, NameString teacher, Date date, int length) {
+        this.type = type;
+        this.subject = subject;
+        this.theme = theme;
+        this.teacher = teacher;
+        this.date = date;
+        this.length = length;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 37 + teacher.hashCode();
+        result = 37 * result + date.hashCode();
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !(obj instanceof Lesson))
+            return false;
+        Lesson other = (Lesson) obj;
+        return teacher.equals(other.teacher) && date.equals(other.date);
+    }
+
+    @Override
+    public LessonType getType() {
+        return type;
+    }
+
+    @Override
+    public LessonSubject getSubject() {
+        return subject;
+    }
+
+    @Override
+    public String getTheme() {
+        return theme.toString();
+    }
+
+    @Override
+    public String getTeacher() {
+        return teacher.toString();
+    }
+
+    @Override
+    public Date getDate() {
+        return new Date(date.getTime());
+    }
+
+    @Override
+    public int getLength() {
+        return length;
+    }
+
+    public void setType(LessonType type) {
+        this.type = type;
+    }
+
+    public void setSubject(LessonSubject subject) {
+        this.subject = subject;
+    }
+
+    public void setTheme(String theme) {
+        this.theme = new NameString(theme);
+    }
+
+    public void setTeacher(String teacher) {
+        this.teacher = new NameString(teacher);
+    }
+
+    public void setDate(Date date) {
+        this.date = new Date(date.getTime());
+    }
+
+    public void setLength(int length) {
+        this.length = length;
+    }
 }

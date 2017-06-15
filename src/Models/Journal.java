@@ -1,5 +1,10 @@
 package Models;
 
+import Interfaces.IJournal;
+import Interfaces.ILesson;
+import Interfaces.IStudent;
+import MyUtils.Utils;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -9,58 +14,43 @@ import java.util.Set;
 /**
  * Created by sa on 08.06.17.
  */
-public class Journal {
-    private Long id;
-    private Lesson lesson;
-    private Set<Long> presence;
+public class Journal implements IJournal {
 
-//    public Journal(Lesson lesson) {
-//        this.lesson = lesson;
-//        this.id = System.currentTimeMillis() + (long)(Math.random() * Integer.MAX_VALUE);
-//
-//        // изначальное состояние журнала
-//        // студент считается присутствующим, если он есть в множестве presence
-//        presence = new HashSet<>();
-//    }
-//
-//    public void setPresence(Student student) {
-//        presence.add(student.getId());
-//    }
-//
-//    public List<Student> wasOnLesson() {
-//        List<Student> students = new ArrayList<>();
-//        for(Group group: lesson.getGroups()) {
-//            for(Student student: group) {
-//                if (presence.contains(student.getId()))
-//                    students.add(student);
-//            }
-//        }
-//        return students;
-//    }
-//
-//    public List<Student> missOnLesson() {
-//        List<Student> students = new ArrayList<>();
-//        for(Group group: lesson.getGroups()) {
-//            for(Student student: group) {
-//                if (!presence.contains(student.getId()))
-//                    students.add(student);
-//            }
-//        }
-//        return students;
-//    }
-//
-//    @Override
-//    public boolean equals(Object o) {
-//        if (o == null) return false;
-//        if (!(o instanceof Journal)) return false;
-//
-//        Journal journal = (Journal) o;
-//        return (id == journal.id);
-//
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        return (int)(41 * id + 21);
-//    }
+    private Lesson lesson;
+    private IStudent[] mustBe;
+    private boolean[] wasBe;
+
+    @Override
+    public int hashCode() {
+        return lesson.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return lesson.equals(obj);
+    }
+
+    @Override
+    public ILesson getLesson() {
+        return lesson;
+    }
+
+    @Override
+    public int contains(IStudent student) {
+        return Utils.contains(mustBe, student);
+    }
+
+    @Override
+    public boolean wasOnLesson(IStudent student) {
+        int index = contains(student);
+        if (index != -1)
+            return wasBe[index];
+        return false;
+    }
+
+    @Override
+    public boolean wasOnLesson(int index) {
+        return wasBe[index];
+    }
+
 }
