@@ -10,16 +10,20 @@ import java.util.*;
 public class Group implements IGroup {
 
     private NameString name;                // название группы
-    private List<IStudent> students;        // список студентов
+    private int year;                       // год существования группы
+    private List<IStudent> students;        // список студентов в группе
 
-    public Group(String name) {
+    public Group(String name, int year) {
         this.name = new NameString(name);
+        this.year = year;
         students = new ArrayList<>();
     }
 
     @Override
     public int hashCode() {
-        return name.hashCode();
+        int result = 37 + name.hashCode();
+        result = 37 * result + year;
+        return result;
     }
 
     @Override
@@ -27,7 +31,7 @@ public class Group implements IGroup {
         if (obj == null || !(obj instanceof  Group))
             return false;
         Group other = (Group) obj;
-        return name.equals(other.name);
+        return name.equals(other.name) && year == other.year;
     }
 
     @Override
