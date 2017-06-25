@@ -12,8 +12,8 @@ import java.util.List;
 public class RecyclerActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
-    private RecyclerAdapter mAdapter;
-    private List<String> mNames;
+    private StudentsAdapter mAdapter;
+//    private List<String> mNames;
 
 
     @Override
@@ -24,38 +24,36 @@ public class RecyclerActivity extends AppCompatActivity {
         // привязываем вьюшки
         mRecyclerView = (RecyclerView) findViewById(R.id.myRecyclerView);
 
-        LinearLayoutManager man;
+//        mNames = new ArrayList<>();
+//        mNames.add("Вася");
+//        mNames.add("Петя");
+//        mNames.add("Коля");
+//        mNames.add("Галя");
 
-        mNames = new ArrayList<>();
-        mNames.add("Вася");
-        mNames.add("Петя");
-        mNames.add("Коля");
-        mNames.add("Галя");
+//        mAdapter = new StudentsAdapter(mNames);
+//        mRecyclerView.setAdapter(mAdapter);
 
-        mAdapter = new RecyclerAdapter(mNames);
-        mRecyclerView.setAdapter(mAdapter);
-
-        setRecyclerViewItemTouchListener();
+//        setRecyclerViewItemTouchListener();
 
     }
 
-    private void setRecyclerViewItemTouchListener() {
-        ItemTouchHelper.SimpleCallback itemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
-            @Override
-            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-                return false;
-            }
-
-            @Override
-            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                int position = viewHolder.getAdapterPosition();
-                mNames.remove(position);
-                mRecyclerView.getAdapter().notifyItemRemoved(position);
-            }
-        };
-
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(itemTouchCallback);
-        itemTouchHelper.attachToRecyclerView(mRecyclerView);
-    }
+//    private void setRecyclerViewItemTouchListener() {
+//        ItemTouchHelper.SimpleCallback itemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+//            @Override
+//            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+//                return false;
+//            }
+//
+//            @Override
+//            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+//                int position = viewHolder.getAdapterPosition();
+//                mNames.remove(position);
+//                mRecyclerView.getAdapter().notifyItemRemoved(position);
+//            }
+//        };
+//
+//        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(itemTouchCallback);
+//        itemTouchHelper.attachToRecyclerView(mRecyclerView);
+//    }
 
 }

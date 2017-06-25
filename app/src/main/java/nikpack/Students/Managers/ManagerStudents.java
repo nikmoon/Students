@@ -6,24 +6,34 @@ import nikpack.Students.Models.Student;
 import nikpack.utils.Contacts;
 import nikpack.utils.DayDate;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
  * Created by sa on 15.06.17.
  */
-public class ManagerStudents implements Iterable<IStudent>, Iterator<IStudent> {
+//public class ManagerStudents implements Iterable<IStudent>, Iterator<IStudent> {
+public class ManagerStudents {
 
-    private Set<Student> students;      // множество всех студентов
-    Iterator<Student> iteratorStudents;
+    public static ManagerStudents instance = new ManagerStudents();
+    public static ManagerStudents getInstance() {
+        return instance;
+    }
+
+    private Set<Student> students;          // множество всех студентов
+    private List<Student> listStudents;
+//    Iterator<Student> iteratorStudents;
 
     public class InvalidPassportException extends Exception {}
     public class StudentExistsException extends Exception {}
 
-    public ManagerStudents() {
+    private ManagerStudents() {
         students = new LinkedHashSet<>();
+        listStudents = new ArrayList<>();
     }
 
     /**
@@ -55,33 +65,46 @@ public class ManagerStudents implements Iterable<IStudent>, Iterator<IStudent> {
             throw new InvalidPassportException();
 
         Student student = new Student(gender, firstName, lastName, middleName, birthDate, contacts, group, passport);
-        if (!students.add(student))
-            throw new StudentExistsException();
+
+        synchronized (students) {
+            if (!students.add(student))
+                throw new StudentExistsException();
+            listStudents.add(student);
+        }
+
         return student;
     }
 
-    public IStudent[] getStudents() {
-        return students.toArray(new IStudent[students.size()]);
+    public synchronized IStudent getStudent(int index) {
+        return listStudents.get(index);
     }
 
-    @Override
-    public Iterator<IStudent> iterator() {
-        iteratorStudents = students.iterator();
-        return this;
+    public synchronized IStudent[] getStudents() {
+            return students.toArray(new IStudent[students.size()]);
     }
 
-    @Override
-    public void remove() {
-        iteratorStudents.remove();
+    public int getCount() {
+        return listStudents.size();
     }
 
-    @Override
-    public boolean hasNext() {
-        return iteratorStudents.hasNext();
-    }
-
-    @Override
-    public IStudent next() {
-        return iteratorStudents.next();
-    }
+//    @Override
+//    public Iterator<IStudent> iterator() {
+//        iteratorStudents = students.iterator();
+//        return this;
+//    }
+//
+//    @Override
+//    public void remove() {
+//        iteratorStudents.remove();
+//    }
+//
+//    @Override
+//    public boolean hasNext() {
+//        return iteratorStudents.hasNext();
+//    }
+//
+//    @Override
+//    public IStudent next() {
+//        return iteratorStudents.next();
+//    }
 }

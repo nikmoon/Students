@@ -1,21 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:background="@android:drawable/title_bar"
+    android:minHeight="100dp"
+    android:orientation="horizontal">
 
     <TextView
-        android:id="@+id/tvName"
-        android:layout_width="match_parent"
-        android:layout_height="121dp"
-        android:background="@color/MyColor"
-        android:text="TextView" />
-
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="match_parent"
+        android:id="@+id/tvLastName"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0.43"
-        android:text="Button" />
+        android:text="Фамилия"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_weight="3"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/tvFirstName"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="0dp" />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/tvFirstName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Имя"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvLastName"
+        app:layout_constraintHorizontal_weight="2"
+        app:layout_constraintLeft_toRightOf="@+id/tvLastName"
+        app:layout_constraintRight_toLeftOf="@+id/tvMiddleName" />
+
+    <TextView
+        android:id="@+id/tvMiddleName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Отчество"
+        app:layout_constraintBaseline_toBaselineOf="@id/tvLastName"
+        app:layout_constraintHorizontal_weight="2"
+        app:layout_constraintLeft_toRightOf="@+id/tvFirstName"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="0dp" />
+</android.support.constraint.ConstraintLayout>
