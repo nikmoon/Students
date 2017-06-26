@@ -7,8 +7,6 @@ import nikpack.utils.Contacts;
 import nikpack.utils.DayDate;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -25,13 +23,16 @@ public class ManagerStudents {
 
     private Set<Student> students;          // множество всех студентов
     private List<Student> listStudents;
+    private List<Student> filteredListStudents;
+    private String filterString;
 
     public class InvalidPassportException extends Exception {}
     public class StudentExistsException extends Exception {}
 
     private ManagerStudents() {
         students = new LinkedHashSet<>();
-        listStudents = new ArrayList<>();
+        filteredListStudents = new ArrayList<>();
+        listStudents = filteredListStudents;
     }
 
     /**
@@ -48,7 +49,7 @@ public class ManagerStudents {
      * @throws StudentExistsException
      * @throws InvalidPassportException
      */
-    public IStudent createStudent(Student.GenderType gender, String firstName, String lastName, String middleName,
+    public synchronized IStudent createStudent(Student.GenderType gender, String firstName, String lastName, String middleName,
                                   DayDate birthDate, Contacts contacts, Group group, String passport, int photoIndex)
             throws StudentExistsException, InvalidPassportException
     {
@@ -64,20 +65,25 @@ public class ManagerStudents {
 
         Student student = new Student(gender, firstName, lastName, middleName, birthDate, contacts, group, passport, photoIndex);
 
-        synchronized (students) {
-            if (!students.add(student))
-                throw new StudentExistsException();
-            listStudents.add(student);
-        }
+        addStudent(student);
 
         return student;
+    }
+
+    private void addStudent(Student student) throws StudentExistsException {
+        if (!students.add(student))
+            throw new StudentExistsException();
+
+        listStudents.add(student);
+
+            // // TODO: 26.06.17 Добавление нового студента, в случае, если фильтрация активирована
     }
 
     /**
      * Получить "иммутабельный" экземпляр студента по индексу
      */
     public synchronized IStudent getStudent(int index) {
-        return listStudents.get(index);
+        return filteredListStudents.get(index);
     }
 
     // Полный новый список всех студентов
@@ -89,6 +95,32 @@ public class ManagerStudents {
      * Текущее количество студентов
      */
     public int getCount() {
-        return listStudents.size();
+        return filteredListStudents.size();
+    }
+
+
+    // задаем фильтр по фамилиям студентов
+    public void setFilter(String filter) {
+        if (filter == null || filter.equals("")) {
+            filterString = null;
+            filteredListStudents = listStudents;
+            return;
+        }
+
+        // сохранили строку для фильтрования
+        filterString = filter;
+
+        // создаем новый список с отфильтрованными элементами
+        filteredListStudents = new ArrayList<>();
+        for(Student student: listStudents) {
+            if (student.getLastName().toLowerCase().startsWith(filter)) {
+                filteredListStudents.add(student);
+            }
+        }
+    }
+
+    // очищаем существующий фильтр по фамилиям студентов
+    public void clearFilter() {
+        setFilter(null);
     }
 }

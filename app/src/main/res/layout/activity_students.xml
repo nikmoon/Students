@@ -6,52 +6,57 @@
     android:layout_height="match_parent"
     tools:context="com.example.nikbird.students.StudentsActivity">
 
-    <TextView
-        android:id="@+id/tvHeaderLastName"
-        app:layout_constraintHorizontal_weight="3"
+    <android.support.v7.widget.SearchView
+        android:id="@+id/searchLastName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/tvHeaderFirstName"
-        android:text="Фамилия"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp" />
-
-    <TextView
-        android:id="@+id/tvHeaderFirstName"
-        app:layout_constraintHorizontal_weight="2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toRightOf="@+id/tvHeaderLastName"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tvHeaderLastName"
-        app:layout_constraintRight_toLeftOf="@+id/tvHeaderMiddleName"
-        android:text="Имя"
-        android:layout_marginLeft="8dp" />
-
-    <TextView
-        android:id="@+id/tvHeaderMiddleName"
-        app:layout_constraintHorizontal_weight="2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Отчество"
-        app:layout_constraintLeft_toRightOf="@+id/tvHeaderFirstName"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tvHeaderLastName"
-        app:layout_constraintRight_toLeftOf="@+id/tvHeaderGroup"
-        android:layout_marginRight="8dp"
-        android:layout_marginLeft="8dp" />
-
-    <TextView
-        android:id="@+id/tvHeaderGroup"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Группа"
-        app:layout_constraintLeft_toRightOf="@+id/tvHeaderMiddleName"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tvHeaderLastName"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginRight="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
-        app:layout_constraintHorizontal_weight="2" />
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_weight="3"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!--<TextView-->
+        <!--android:id="@+id/tvHeaderFirstName"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="8dp"-->
+        <!--android:text="Имя"-->
+        <!--app:layout_constraintBaseline_toBaselineOf="@+id/tvHeaderLastName"-->
+        <!--app:layout_constraintHorizontal_weight="2"-->
+        <!--app:layout_constraintLeft_toRightOf="@+id/tvHeaderLastName"-->
+        <!--app:layout_constraintRight_toLeftOf="@+id/tvHeaderMiddleName">-->
+
+    <!--</TextView>-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/tvHeaderMiddleName"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="8dp"-->
+        <!--android:layout_marginRight="8dp"-->
+        <!--android:text="Отчество"-->
+        <!--app:layout_constraintBaseline_toBaselineOf="@+id/tvHeaderLastName"-->
+        <!--app:layout_constraintHorizontal_weight="2"-->
+        <!--app:layout_constraintLeft_toRightOf="@+id/tvHeaderFirstName"-->
+        <!--app:layout_constraintRight_toLeftOf="@+id/tvHeaderGroup" />-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/tvHeaderGroup"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Группа"-->
+        <!--app:layout_constraintLeft_toRightOf="@+id/tvHeaderMiddleName"-->
+        <!--app:layout_constraintBaseline_toBaselineOf="@+id/tvHeaderLastName"-->
+        <!--app:layout_constraintRight_toRightOf="parent"-->
+        <!--android:layout_marginRight="8dp"-->
+        <!--android:layout_marginLeft="8dp"-->
+        <!--app:layout_constraintHorizontal_weight="2" />-->
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/vStudents"
@@ -65,5 +70,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvHeaderLastName" />
+        app:layout_constraintTop_toBottomOf="@+id/searchLastName"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp" />
 </android.support.constraint.ConstraintLayout>

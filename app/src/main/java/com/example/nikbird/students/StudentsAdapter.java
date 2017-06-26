@@ -81,4 +81,10 @@ public class StudentsAdapter extends RecyclerView.Adapter<StudentsAdapter.Studen
     public int getItemCount() {
         return managerStudents.getCount();
     }
+
+
+    public void filter(String filter) {
+        managerStudents.setFilter(filter.toLowerCase());
+        notifyDataSetChanged();
+    }
 }
