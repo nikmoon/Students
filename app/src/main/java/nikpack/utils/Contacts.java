@@ -1,5 +1,7 @@
 package nikpack.utils;
 
+import com.example.nikbird.students.R;
+
 import java.util.*;
 
 /**
@@ -10,12 +12,23 @@ public class Contacts implements Iterable<Map.Entry<Contacts.ContactType, List<S
     private Map<ContactType, List<String>> contacts = new HashMap<>();
 
     public enum ContactType {
-        ADDRESS,
-        PHONE,
-        EMAIL,
-        TELEGRAM,
-        SKYPE,
-        VK,
+        ADDRESS(R.drawable.address_icon),
+        PHONE(R.drawable.phone_icon),
+        EMAIL(R.drawable.email_icon),
+        TELEGRAM(R.drawable.telegram_icon),
+        SKYPE(R.drawable.skype_icon),
+        VK(R.drawable.vk_icon);
+
+        private int imageIndex;
+
+        ContactType(int imageIndex) {
+            this.imageIndex = imageIndex;
+        }
+
+        public int getImageIndex() {
+            return imageIndex;
+        }
+
     }
 
     public void add(ContactType contactType, String value) {
@@ -43,6 +56,14 @@ public class Contacts implements Iterable<Map.Entry<Contacts.ContactType, List<S
     @Override
     public Iterator<Map.Entry<ContactType, List<String>>> iterator() {
         return contacts.entrySet().iterator();
+    }
+
+    public int getCount() {
+        return contacts.size();
+    }
+
+    public ContactType[] getContactTypes() {
+        return contacts.keySet().toArray(new ContactType[contacts.size()]);
     }
 
 }

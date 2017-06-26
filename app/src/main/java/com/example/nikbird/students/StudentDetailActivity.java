@@ -44,5 +44,8 @@ public class StudentDetailActivity extends AppCompatActivity {
         tvStudentLastName.setText(student.getLastName());
         tvStudentMiddleName.setText(student.getMiddleName());
         ivStudentPhoto.setImageResource(student.getPhotoIndex());
+
+        contactsView = (RecyclerView) findViewById(R.id.recvContacts);
+        contactsView.setAdapter(new StudentDetailContactsAdapter(student.getContacts()));
     }
 }

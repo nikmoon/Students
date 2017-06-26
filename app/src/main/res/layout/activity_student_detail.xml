@@ -148,6 +148,7 @@
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recvContacts"
+                app:layoutManager="android.support.v7.widget.LinearLayoutManager"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@color/colorAccent"
@@ -158,6 +159,7 @@
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recvJournal"
+                app:layoutManager="android.support.v7.widget.LinearLayoutManager"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@color/MyColor"
