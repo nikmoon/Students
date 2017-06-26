@@ -7,9 +7,9 @@ import nikpack.utils.Contacts;
 import nikpack.utils.DayDate;
 
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 /**
  * Created by sa on 15.06.17.
@@ -21,18 +21,25 @@ public class ManagerStudents {
         return instance;
     }
 
-    private Set<Student> students;          // множество всех студентов
+    private Map<String, Student> mapStudents;          // множество всех студентов
     private List<Student> listStudents;
     private List<Student> filteredListStudents;
     private String filterString;
 
+    private List<ISubscriber> subscribers;
+
     public class InvalidPassportException extends Exception {}
     public class StudentExistsException extends Exception {}
 
+    public static interface ISubscriber {
+        void onRemoveStudent(IStudent student);
+        void onAddStudent(IStudent student);
+    }
+
     private ManagerStudents() {
-        students = new LinkedHashSet<>();
-        filteredListStudents = new ArrayList<>();
-        listStudents = filteredListStudents;
+        mapStudents = new HashMap<>();
+        listStudents = new ArrayList<>();
+        subscribers = new ArrayList<>();
     }
 
     /**
@@ -53,49 +60,76 @@ public class ManagerStudents {
                                   DayDate birthDate, Contacts contacts, Group group, String passport, int photoIndex)
             throws StudentExistsException, InvalidPassportException
     {
-        // не должно быть нулевых параметров
+        // валидация всех ссылок
         boolean check = firstName != null && lastName != null && middleName != null && birthDate != null &&
                 contacts != null && group != null && passport != null;
         if (!check)
             throw new NullPointerException();
 
+        // валидация номера паспорта
         passport = passport.replace(" ", "");
         if (!passport.matches("\\d{10}+"))
             throw new InvalidPassportException();
+        if(mapStudents.containsKey(passport))
+            throw new StudentExistsException();
 
+        // создаем экземпляр студента и добавляем его в общее отображение
         Student student = new Student(gender, firstName, lastName, middleName, birthDate, contacts, group, passport, photoIndex);
-
         addStudent(student);
 
         return student;
     }
 
-    private void addStudent(Student student) throws StudentExistsException {
-        if (!students.add(student))
-            throw new StudentExistsException();
-
+    // Добавление нового студента в общее отображение
+    private synchronized void addStudent(Student student){
+        mapStudents.put(student.getPassport(), student);
         listStudents.add(student);
 
-            // // TODO: 26.06.17 Добавление нового студента, в случае, если фильтрация активирована
+        // рассылаем оповещения всем подписчикам
+        for(ISubscriber subscriber: subscribers) {
+            subscriber.onAddStudent(student);
+        }
     }
 
     /**
      * Получить "иммутабельный" экземпляр студента по индексу
      */
     public synchronized IStudent getStudent(int index) {
-        return filteredListStudents.get(index);
+        return listStudents.get(index);
+    }
+
+    /**
+     * Получить "иммутабельный" экземпляр студента по номеру паспорта
+     * @return
+     */
+    public synchronized IStudent getStudent(String passport) {
+        return mapStudents.get(passport);
     }
 
     // Полный новый список всех студентов
-    public synchronized IStudent[] getStudents() {
-            return students.toArray(new IStudent[students.size()]);
+    public synchronized List<IStudent> getStudents(ISubscriber subscriber) {
+        if (subscriber != null)
+            subscribers.add(subscriber);
+
+        List<IStudent> newList = new ArrayList<>(listStudents.size());
+        for(int i = 0; i < listStudents.size(); i++)
+            newList.add(listStudents.get(i));
+        return newList;
+    }
+
+    public synchronized List<IStudent> getFilteredList(String filter) {
+        List<IStudent> newList = new ArrayList<>(listStudents.size() / 2);
+        for(int i = 0; i < listStudents.size(); i++)
+            if (listStudents.get(i).getLastName().toLowerCase().startsWith(filter))
+                newList.add(listStudents.get(i));
+        return newList;
     }
 
     /**
      * Текущее количество студентов
      */
     public int getCount() {
-        return filteredListStudents.size();
+        return listStudents.size();
     }
 
 
@@ -117,10 +151,5 @@ public class ManagerStudents {
                 filteredListStudents.add(student);
             }
         }
-    }
-
-    // очищаем существующий фильтр по фамилиям студентов
-    public void clearFilter() {
-        setFilter(null);
     }
 }

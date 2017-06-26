@@ -1,6 +1,5 @@
 package com.example.nikbird.students;
 
-import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
@@ -15,7 +14,7 @@ public class StudentDetailActivity extends AppCompatActivity {
     private RecyclerView contactsView;
     private RecyclerView journalsView;
     private ManagerStudents managerStudents;
-    private int studentIndex;
+    private String studentPassport;
 
     private TextView tvStudentLastName;
     private TextView tvStudentFirstName;
@@ -27,13 +26,13 @@ public class StudentDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_detail);
 
-        studentIndex = getIntent().getIntExtra(StudentsAdapter.EXTRA_STUDENT_INDEX, -1);
-        if (studentIndex == -1) {
+        studentPassport = getIntent().getStringExtra(StudentsAdapter.EXTRA_STUDENT_PASSPORT);
+        if ("".equals(studentPassport)) {
             return;
         }
 
         managerStudents = ManagerStudents.getInstance();
-        IStudent student = managerStudents.getStudent(studentIndex);
+        IStudent student = managerStudents.getStudent(studentPassport);
 
         tvStudentFirstName = (TextView) findViewById(R.id.tvFirstName);
         tvStudentLastName = (TextView) findViewById(R.id.tvLastName);
