@@ -36,6 +36,19 @@ public class LoginActivity extends AppCompatActivity{
             }
         });
 
+//        buttonLogin.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                String login = editTextLogin.getText().toString();
+//                String password = editTextPassword.getText().toString();
+//                if (authenticated(login, password)) {
+//                    Intent intent = new Intent(view.getContext(), StudentDetailActivity.class);
+//                    startActivity(intent);
+//                }
+//            }
+//        });
+
+
         buttonRegistration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

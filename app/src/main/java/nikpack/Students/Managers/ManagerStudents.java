@@ -16,7 +16,6 @@ import java.util.Set;
 /**
  * Created by sa on 15.06.17.
  */
-//public class ManagerStudents implements Iterable<IStudent>, Iterator<IStudent> {
 public class ManagerStudents {
 
     public static ManagerStudents instance = new ManagerStudents();
@@ -26,7 +25,6 @@ public class ManagerStudents {
 
     private Set<Student> students;          // множество всех студентов
     private List<Student> listStudents;
-//    Iterator<Student> iteratorStudents;
 
     public class InvalidPassportException extends Exception {}
     public class StudentExistsException extends Exception {}
@@ -51,7 +49,7 @@ public class ManagerStudents {
      * @throws InvalidPassportException
      */
     public IStudent createStudent(Student.GenderType gender, String firstName, String lastName, String middleName,
-                                  DayDate birthDate, Contacts contacts, Group group, String passport)
+                                  DayDate birthDate, Contacts contacts, Group group, String passport, int photoIndex)
             throws StudentExistsException, InvalidPassportException
     {
         // не должно быть нулевых параметров
@@ -64,7 +62,7 @@ public class ManagerStudents {
         if (!passport.matches("\\d{10}+"))
             throw new InvalidPassportException();
 
-        Student student = new Student(gender, firstName, lastName, middleName, birthDate, contacts, group, passport);
+        Student student = new Student(gender, firstName, lastName, middleName, birthDate, contacts, group, passport, photoIndex);
 
         synchronized (students) {
             if (!students.add(student))
@@ -75,36 +73,22 @@ public class ManagerStudents {
         return student;
     }
 
+    /**
+     * Получить "иммутабельный" экземпляр студента по индексу
+     */
     public synchronized IStudent getStudent(int index) {
         return listStudents.get(index);
     }
 
+    // Полный новый список всех студентов
     public synchronized IStudent[] getStudents() {
             return students.toArray(new IStudent[students.size()]);
     }
 
+    /**
+     * Текущее количество студентов
+     */
     public int getCount() {
         return listStudents.size();
     }
-
-//    @Override
-//    public Iterator<IStudent> iterator() {
-//        iteratorStudents = students.iterator();
-//        return this;
-//    }
-//
-//    @Override
-//    public void remove() {
-//        iteratorStudents.remove();
-//    }
-//
-//    @Override
-//    public boolean hasNext() {
-//        return iteratorStudents.hasNext();
-//    }
-//
-//    @Override
-//    public IStudent next() {
-//        return iteratorStudents.next();
-//    }
 }

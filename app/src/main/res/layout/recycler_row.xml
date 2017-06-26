@@ -8,8 +8,8 @@
     android:minHeight="100dp"
     android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/tvLastName"
+    <Button
+        android:id="@+id/btnLastName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Фамилия"
@@ -25,9 +25,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Имя"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tvLastName"
+        app:layout_constraintBaseline_toBaselineOf="@+id/btnLastName"
         app:layout_constraintHorizontal_weight="2"
-        app:layout_constraintLeft_toRightOf="@+id/tvLastName"
+        app:layout_constraintLeft_toRightOf="@+id/btnLastName"
         app:layout_constraintRight_toLeftOf="@+id/tvMiddleName" />
 
     <TextView
@@ -35,9 +35,20 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Отчество"
-        app:layout_constraintBaseline_toBaselineOf="@id/tvLastName"
+        app:layout_constraintBaseline_toBaselineOf="@id/btnLastName"
         app:layout_constraintHorizontal_weight="2"
         app:layout_constraintLeft_toRightOf="@+id/tvFirstName"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/btnGroup"
         android:layout_marginRight="0dp" />
+
+    <Button
+        android:id="@+id/btnGroup"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Группа"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvFirstName"
+        app:layout_constraintHorizontal_weight="2"
+        app:layout_constraintLeft_toRightOf="@id/tvMiddleName"
+        app:layout_constraintRight_toRightOf="parent" />
 </android.support.constraint.ConstraintLayout>

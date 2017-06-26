@@ -20,4 +20,5 @@ public interface IStudent {
     Group getGroup();
     Student.Status getStatus();
     String getPassport();
+    int getPhotoIndex();
 }

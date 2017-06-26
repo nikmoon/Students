@@ -18,6 +18,7 @@ public class Student implements IStudent, Externalizable {
     private Contacts contacts;          // контакты
     private Group group;                // группа, в которой числится студент
     private Status status;              // текущий статус
+    private int photoIndex;         // индекс Drawable
 
     private String passport;         // серия и номер паспорта
 
@@ -45,7 +46,7 @@ public class Student implements IStudent, Externalizable {
      */
     public Student(GenderType gender, String firstName, String lastName,
                    String middleName, DayDate birthDate, Contacts contacts,
-                   Group group, String passport) {
+                   Group group, String passport, int photoIndex) {
         this.gender = gender;
         this.firstName = new NameString(firstName);
         this.lastName = new NameString(lastName);
@@ -54,7 +55,10 @@ public class Student implements IStudent, Externalizable {
         this.contacts = contacts;
         this.group = group;
         this.passport = passport;
+        this.photoIndex = photoIndex;
     }
+
+
 
     public Student() {
     }
@@ -145,6 +149,11 @@ public class Student implements IStudent, Externalizable {
     @Override
     public String getPassport() {
         return passport;
+    }
+
+    @Override
+    public int getPhotoIndex() {
+        return photoIndex;
     }
 
     public void setGender(GenderType gender) {

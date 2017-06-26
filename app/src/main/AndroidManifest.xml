@@ -21,7 +21,8 @@
         <activity android:name=".SelectionActivity" />
         <activity android:name=".StudentsActivity" />
         <activity android:name=".GroupsActivity" />
-        <activity android:name=".LessonsActivity"></activity>
+        <activity android:name=".LessonsActivity" />
+        <activity android:name=".StudentDetailActivity"></activity>
     </application>
 
 </manifest>
