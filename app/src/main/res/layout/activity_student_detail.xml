@@ -152,7 +152,6 @@
                 android:layout_height="wrap_content"
                 android:background="@color/colorAccent"
                 android:maxHeight="300dp"
-                android:minHeight="200dp"
                 app:layout_constraintLeft_toLeftOf="@+id/tvStudentContacts"
                 app:layout_constraintRight_toRightOf="@+id/tvStudentContacts"
                 app:layout_constraintTop_toBottomOf="@+id/tvStudentContacts" />
@@ -163,7 +162,6 @@
                 android:layout_height="wrap_content"
                 android:background="@color/MyColor"
                 android:maxHeight="300dp"
-                android:minHeight="200dp"
                 app:layout_constraintLeft_toLeftOf="@+id/tvStudentJournal"
                 app:layout_constraintRight_toRightOf="@+id/tvStudentJournal"
                 app:layout_constraintTop_toTopOf="@+id/recvContacts" />

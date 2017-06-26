@@ -16,9 +16,6 @@ public class Contacts implements Iterable<Map.Entry<Contacts.ContactType, List<S
         TELEGRAM,
         SKYPE,
         VK,
-        FACEBOOK,
-        LINKEDIN,
-        ODNOKLASSNIKI
     }
 
     public void add(ContactType contactType, String value) {

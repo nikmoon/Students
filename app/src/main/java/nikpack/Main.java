@@ -57,9 +57,17 @@ public class Main {
             };
         } catch (ManagerStudents.StudentExistsException e) {
             e.printStackTrace();
+            return;
         } catch (ManagerStudents.InvalidPassportException e) {
             e.printStackTrace();
+            return;
         }
+
+        Contacts rasputin = managerStudents.getStudent(0).getContacts();
+        rasputin.add(Contacts.ContactType.EMAIL, "rasputin@moskow.dr");
+        rasputin.add(Contacts.ContactType.SKYPE, "rasputin");
+        rasputin.add(Contacts.ContactType.VK, "http://vk.ru/rasputin");
+        rasputin.add(Contacts.ContactType.TELEGRAM, "@rasputin");
     }
 
 }
