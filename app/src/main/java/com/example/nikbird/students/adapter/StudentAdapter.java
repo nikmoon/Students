@@ -24,7 +24,7 @@ import nikpack.Students.Managers.ManagerStudents;
 
 public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentHolder> implements ManagerStudents.ISubscriber {
 
-    public static final String EXTRA_STUDENT_PASSPORT = "com.example.nikbird.students.STUDENT_PASSPORT";
+    public static final String EXTRA_STUDENT_PASSPORT = "com.example.nikbird.students.adapter..StudentAdapter.STUDENT_PASSPORT";
 
     private ManagerStudents managerStudents;
     private List<IStudent> students;
@@ -42,11 +42,11 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentH
         public StudentHolder(View view) {
             super(view);
 
-            studentPhoto = (ImageView) view.findViewById(R.id.ivStudentPhoto);
-            tvFirstName = (TextView) view.findViewById(R.id.tvFirstName);
-            btnLastName = (Button) view.findViewById(R.id.btnLastName);
-            tvMiddleName = (TextView) view.findViewById(R.id.tvMiddleName);
-            btnGroupName = (Button) view.findViewById(R.id.btnGroup);
+            studentPhoto = view.findViewById(R.id.ivStudentPhoto);
+            tvFirstName = view.findViewById(R.id.tvFirstName);
+            btnLastName = view.findViewById(R.id.btnLastName);
+            tvMiddleName = view.findViewById(R.id.tvMiddleName);
+            btnGroupName = view.findViewById(R.id.btnGroup);
 
             btnLastName.setOnClickListener(this);
             studentPhoto.setOnClickListener(this);
