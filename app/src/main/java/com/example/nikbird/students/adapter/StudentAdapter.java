@@ -1,5 +1,4 @@
-package com.example.nikbird.students;
-
+package com.example.nikbird.students.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,16 +10,19 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.nikbird.students.R;
+import com.example.nikbird.students.StudentDetailActivity;
+
 import java.util.List;
 
 import nikpack.Students.Interfaces.IStudent;
 import nikpack.Students.Managers.ManagerStudents;
 
 /**
- * Created by nikbird on 24.06.17.
+ * Created by nikbird on 29.06.17.
  */
 
-public class StudentsAdapter extends RecyclerView.Adapter<StudentsAdapter.StudentHolder> implements ManagerStudents.ISubscriber {
+public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentHolder> implements ManagerStudents.ISubscriber {
 
     public static final String EXTRA_STUDENT_PASSPORT = "com.example.nikbird.students.STUDENT_PASSPORT";
 
@@ -63,26 +65,26 @@ public class StudentsAdapter extends RecyclerView.Adapter<StudentsAdapter.Studen
         public void onClick(View view) {
             Context context = view.getContext();
             Intent intent = new Intent(context, StudentDetailActivity.class);
-            intent.putExtra(StudentsAdapter.EXTRA_STUDENT_PASSPORT, student.getPassport());
+            intent.putExtra(StudentAdapter.EXTRA_STUDENT_PASSPORT, student.getPassport());
             context.startActivity(intent);
         }
     }
 
-    public StudentsAdapter(ManagerStudents managerStudents) {
+    public StudentAdapter(ManagerStudents managerStudents) {
         this.managerStudents = managerStudents;
         students = managerStudents.getStudents(this);
         filterLastName = null;
     }
 
     @Override
-    public StudentHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public StudentAdapter.StudentHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View inflated = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.recycler_row, parent, false);
-        return new StudentHolder(inflated);
+        return new StudentAdapter.StudentHolder(inflated);
     }
 
     @Override
-    public void onBindViewHolder(StudentHolder holder, int position) {
+    public void onBindViewHolder(StudentAdapter.StudentHolder holder, int position) {
         holder.bindStudent(students.get(position));
     }
 
