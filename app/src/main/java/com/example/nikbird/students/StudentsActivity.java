@@ -1,11 +1,9 @@
 package com.example.nikbird.students;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.View;
 
 import nikpack.Main;
@@ -34,7 +32,7 @@ public class StudentsActivity extends AppCompatActivity {
         studentsView = (RecyclerView) findViewById(R.id.vStudents);
         studentsAdapter = new StudentsAdapter(managerStudents);
         studentsView.setAdapter(studentsAdapter);
-        searchView = (SearchView) findViewById(R.id.searchLastName);
+        searchView = (SearchView) findViewById(R.id.searchView);
 
         // при каждом изменении фильтра будем обновлять список студентов
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -56,5 +54,10 @@ public class StudentsActivity extends AppCompatActivity {
                 searchView.setIconified(false);
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
     }
 }

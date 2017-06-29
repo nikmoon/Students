@@ -30,24 +30,12 @@ public class LoginActivity extends AppCompatActivity{
                 String login = editTextLogin.getText().toString();
                 String password = editTextPassword.getText().toString();
                 if (authenticated(login, password)) {
-                    Intent intent = new Intent(view.getContext(), SelectionActivity.class);
+//                    Intent intent = new Intent(view.getContext(), SelectionActivity.class);
+                    Intent intent = new Intent(view.getContext(), ListsActivity.class);
                     startActivity(intent);
                 }
             }
         });
-
-//        buttonLogin.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                String login = editTextLogin.getText().toString();
-//                String password = editTextPassword.getText().toString();
-//                if (authenticated(login, password)) {
-//                    Intent intent = new Intent(view.getContext(), StudentDetailActivity.class);
-//                    startActivity(intent);
-//                }
-//            }
-//        });
-
 
         buttonRegistration.setOnClickListener(new View.OnClickListener() {
             @Override

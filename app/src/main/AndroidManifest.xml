@@ -18,14 +18,20 @@
         </activity>
         <activity android:name=".RecyclerActivity" />
         <activity android:name=".RegistrationActivity" />
-        <activity android:name=".SelectionActivity" />
-        <activity android:name=".StudentsActivity"
-            android:launchMode="singleTask"/>
-        <activity android:name=".GroupsActivity"
-            android:launchMode="singleTask"/>
-        <activity android:name=".LessonsActivity"
-            android:launchMode="singleTask"/>
-        <activity android:name=".StudentDetailActivity"></activity>
+        <activity
+            android:name=".SelectionActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".StudentsActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".GroupsActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".LessonsActivity"
+            android:launchMode="singleTask" />
+        <activity android:name=".StudentDetailActivity" />
+        <activity android:name=".ListsActivity"></activity>
     </application>
 
 </manifest>
