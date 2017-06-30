@@ -1,16 +1,14 @@
-package com.example.nikbird.students.fragment;
+package com.example.nikbird.students.fragments;
 
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.nikbird.students.ListsActivity;
 import com.example.nikbird.students.R;
 
 /**

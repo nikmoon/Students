@@ -1,4 +1,4 @@
-package com.example.nikbird.students.adapter;
+package com.example.nikbird.students.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,23 +11,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.nikbird.students.R;
-import com.example.nikbird.students.StudentDetailActivity;
 
 import java.util.List;
 
 import nikpack.Students.Interfaces.IStudent;
-import nikpack.Students.Managers.ManagerStudents;
 
 /**
  * Created by nikbird on 29.06.17.
  */
+public class StudentAdapter extends RecyclerView.Adapter {
 
-public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentHolder> implements ManagerStudents.ISubscriber {
+    public static final String EXTRA_STUDENT_PASSPORT = "com.example.nikbird.students.adapters.StudentAdapter.PASSPORT";
 
-    public static final String EXTRA_STUDENT_PASSPORT = "com.example.nikbird.students.adapter..StudentAdapter.STUDENT_PASSPORT";
-
-    private ManagerStudents managerStudents;
-    private List<IStudent> students;
+    private List<? extends IStudent> students;
 
     private String filterLastName;
 
@@ -70,9 +66,8 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentH
         }
     }
 
-    public StudentAdapter(ManagerStudents managerStudents) {
-        this.managerStudents = managerStudents;
-        students = managerStudents.getStudents(this);
+    public StudentAdapter(List<? extends IStudent> students) {
+        this.students = students;
         filterLastName = null;
     }
 
@@ -84,24 +79,13 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentH
     }
 
     @Override
-    public void onBindViewHolder(StudentAdapter.StudentHolder holder, int position) {
-        holder.bindStudent(students.get(position));
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        ((StudentHolder)holder).bindStudent(students.get(position));
     }
 
     @Override
     public int getItemCount() {
         return students.size();
-    }
-
-
-    @Override
-    public void onRemoveStudent(IStudent student) {
-
-    }
-
-    @Override
-    public void onAddStudent(IStudent student) {
-
     }
 
     public void filter(String filter) {

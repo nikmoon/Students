@@ -8,10 +8,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.nikbird.students.fragment.GroupList;
-import com.example.nikbird.students.fragment.LessonList;
-import com.example.nikbird.students.fragment.ListSelection;
-import com.example.nikbird.students.fragment.StudentList;
+import com.example.nikbird.students.fragments.GroupList;
+import com.example.nikbird.students.fragments.LessonList;
+import com.example.nikbird.students.fragments.ListSelection;
+import com.example.nikbird.students.fragments.StudentList;
 
 
 public class ListsActivity extends AppCompatActivity implements ListSelection.OnSelectSpecificList {

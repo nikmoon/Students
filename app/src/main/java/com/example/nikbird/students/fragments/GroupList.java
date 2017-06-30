@@ -1,4 +1,4 @@
-package com.example.nikbird.students.fragment;
+package com.example.nikbird.students.fragments;
 
 
 import android.os.Bundle;
@@ -12,10 +12,10 @@ import com.example.nikbird.students.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class LessonList extends Fragment {
+public class GroupList extends Fragment {
 
 
-    public LessonList() {
+    public GroupList() {
         // Required empty public constructor
     }
 
@@ -24,7 +24,7 @@ public class LessonList extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_lesson_list, container, false);
+        return inflater.inflate(R.layout.fragment_group_list, container, false);
     }
 
 }

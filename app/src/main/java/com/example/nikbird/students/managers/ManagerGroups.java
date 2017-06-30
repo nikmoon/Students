@@ -1,4 +1,4 @@
-package nikpack.Students.Managers;
+package com.example.nikbird.students.managers;
 
 import nikpack.Students.Models.Group;
 

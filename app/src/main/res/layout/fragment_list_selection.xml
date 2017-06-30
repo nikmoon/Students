@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/MyColor"
-    tools:context="com.example.nikbird.students.fragment.ListSelection">
+    tools:context="com.example.nikbird.students.fragments.ListSelection">
 
     <!-- TODO: Update blank fragment layout -->
 

@@ -6,10 +6,10 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.nikbird.students.adapter.StudentAdapter;
+import com.example.nikbird.students.adapters.StudentAdapter;
 
 import nikpack.Students.Interfaces.IStudent;
-import nikpack.Students.Managers.ManagerStudents;
+import com.example.nikbird.students.managers.ManagerStudents;
 
 public class StudentDetailActivity extends AppCompatActivity {
 

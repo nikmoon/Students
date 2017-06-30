@@ -3,7 +3,11 @@ package nikpack;
 import com.example.nikbird.students.R;
 
 import nikpack.Students.Interfaces.IStudent;
-import nikpack.Students.Managers.ManagerStudents;
+import com.example.nikbird.students.managers.ManagerStudents;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import nikpack.Students.Models.Group;
 import nikpack.Students.Models.Student;
 import nikpack.utils.Contacts;
@@ -13,6 +17,7 @@ public class Main {
 
     public static void main(String[] args) {
     }
+
 
     public static void fillManagerStudents(ManagerStudents managerStudents) {
 

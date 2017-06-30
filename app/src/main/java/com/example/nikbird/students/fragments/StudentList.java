@@ -1,4 +1,4 @@
-package com.example.nikbird.students.fragment;
+package com.example.nikbird.students.fragments;
 
 
 import android.content.Context;
@@ -11,10 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.nikbird.students.R;
-import com.example.nikbird.students.adapter.StudentAdapter;
+import com.example.nikbird.students.adapters.StudentAdapter;
 
-import nikpack.Main;
-import nikpack.Students.Managers.ManagerStudents;
+import com.example.nikbird.students.managers.ManagerStudents;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,11 +36,6 @@ public class StudentList extends Fragment {
         this.context = context;
 
         managerStudents = ManagerStudents.getInstance();
-
-        // заполняем менеджер только по необходимости
-        if (managerStudents.getCount() == 0)
-            Main.fillManagerStudents(managerStudents);
-
         studentsAdapter = new StudentAdapter(managerStudents);
     }
 
@@ -73,7 +67,7 @@ public class StudentList extends Fragment {
         searchView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                searchView.setIconified(false);
+                ((SearchView) view).setIconified(false);
             }
         });
 
