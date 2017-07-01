@@ -51,9 +51,9 @@ public class ActivityLists extends AppCompatActivity implements FragmentListSele
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.game_menu, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
 
-        MenuItem searchItem = menu.findItem(R.id.app_bar_search);
+        MenuItem searchItem = menu.findItem(R.id.search_default);
         SearchView searchView = (SearchView) searchItem.getActionView();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

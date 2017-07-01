@@ -27,7 +27,6 @@ public class FragmentStudents extends Fragment {
 
     private RecyclerView mViewStudents;
     private List<IStudent> mStudents;
-    private String mFilter;
 
     public FragmentStudents() {
         // Required empty public constructor
@@ -41,16 +40,12 @@ public class FragmentStudents extends Fragment {
         mViewStudents = view.findViewById(R.id.vStudents);
 
         mStudents = ManagerStudents.getInstance().getStudents();
-        mFilter = savedInstanceState == null ? "" : savedInstanceState.getString(FILTER_TAG, "");
-
-        filterByLastName(mFilter);
         return view;
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString(FILTER_TAG, mFilter);
     }
 
     public void filterByLastName(String filter) {
