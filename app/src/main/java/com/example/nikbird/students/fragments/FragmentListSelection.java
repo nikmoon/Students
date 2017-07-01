@@ -14,19 +14,19 @@ import com.example.nikbird.students.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ListSelection extends Fragment implements View.OnClickListener {
+public class FragmentListSelection extends Fragment implements View.OnClickListener {
 
-    private Button btnSelectStudentList;
-    private Button btnSelectGroupList;
-    private Button btnSelectLessonList;
+    private Button mSelectStudents;
+    private Button mSelectGroups;
+    private Button mSelectLessons;
 
-    private OnSelectSpecificList clickListener;
+    private OnSelectSpecificList mClickListener;
 
     public interface OnSelectSpecificList {
-        public void onSelectSpecificList(int buttonID);
+        void onSelectSpecificList(int buttonId);
     }
 
-    public ListSelection() {
+    public FragmentListSelection() {
         // Required empty public constructor
     }
 
@@ -37,13 +37,13 @@ public class ListSelection extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         ViewGroup viewGroup = (ViewGroup) inflater.inflate(R.layout.fragment_list_selection, container, false);
 
-        btnSelectStudentList = (Button) viewGroup.findViewById(R.id.btnStudents);
-        btnSelectGroupList = (Button) viewGroup.findViewById(R.id.btnGroups);
-        btnSelectLessonList = (Button) viewGroup.findViewById(R.id.btnLessons);
+        mSelectStudents = viewGroup.findViewById(R.id.btnStudents);
+        mSelectGroups = viewGroup.findViewById(R.id.btnGroups);
+        mSelectLessons = viewGroup.findViewById(R.id.btnLessons);
 
-        btnSelectStudentList.setOnClickListener(this);
-        btnSelectGroupList.setOnClickListener(this);
-        btnSelectLessonList.setOnClickListener(this);
+        mSelectStudents.setOnClickListener(this);
+        mSelectGroups.setOnClickListener(this);
+        mSelectLessons.setOnClickListener(this);
 
         return viewGroup;
     }
@@ -52,7 +52,7 @@ public class ListSelection extends Fragment implements View.OnClickListener {
     public void onAttach(Context context) {
         super.onAttach(context);
         try {
-            clickListener = (OnSelectSpecificList) context;
+            mClickListener = (OnSelectSpecificList) context;
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString() + " must implement OnSelectSpecificList");
         }
@@ -60,7 +60,7 @@ public class ListSelection extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        clickListener.onSelectSpecificList(view.getId());
+        mClickListener.onSelectSpecificList(view.getId());
     }
 
 

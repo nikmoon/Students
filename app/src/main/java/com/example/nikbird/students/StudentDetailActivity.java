@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.nikbird.students.adapters.StudentAdapter;
+import com.example.nikbird.students.adapters.AdapterStudents;
 
 import nikpack.Students.Interfaces.IStudent;
 import com.example.nikbird.students.managers.ManagerStudents;
@@ -28,7 +28,7 @@ public class StudentDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_detail);
 
-        studentPassport = getIntent().getStringExtra(StudentAdapter.EXTRA_STUDENT_PASSPORT);
+        studentPassport = getIntent().getStringExtra(AdapterStudents.EXTRA_STUDENT_PASSPORT);
         if ("".equals(studentPassport)) {
             return;
         }

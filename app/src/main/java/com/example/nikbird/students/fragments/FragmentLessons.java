@@ -12,10 +12,9 @@ import com.example.nikbird.students.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class LessonList extends Fragment {
+public class FragmentLessons extends Fragment {
 
-
-    public LessonList() {
+    public FragmentLessons() {
         // Required empty public constructor
     }
 

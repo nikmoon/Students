@@ -31,7 +31,7 @@ public class LoginActivity extends AppCompatActivity{
                 String password = editTextPassword.getText().toString();
                 if (authenticated(login, password)) {
 //                    Intent intent = new Intent(view.getContext(), SelectionActivity.class);
-                    Intent intent = new Intent(view.getContext(), ListsActivity.class);
+                    Intent intent = new Intent(view.getContext(), ActivityLists.class);
                     startActivity(intent);
                 }
             }

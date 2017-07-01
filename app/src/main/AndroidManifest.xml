@@ -12,26 +12,13 @@
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RecyclerActivity" />
         <activity android:name=".RegistrationActivity" />
-        <activity
-            android:name=".SelectionActivity"
-            android:launchMode="singleTask" />
-        <activity
-            android:name=".StudentsActivity"
-            android:launchMode="singleTask" />
-        <activity
-            android:name=".GroupsActivity"
-            android:launchMode="singleTask" />
-        <activity
-            android:name=".LessonsActivity"
-            android:launchMode="singleTask" />
         <activity android:name=".StudentDetailActivity" />
-        <activity android:name=".ListsActivity"></activity>
+        <activity android:name=".ActivityLists" android:launchMode="singleTask"/>
     </application>
 
 </manifest>
+
