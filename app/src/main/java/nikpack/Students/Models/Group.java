@@ -9,20 +9,20 @@ import java.util.*;
 
 public class Group implements IGroup {
 
-    private NameString name;                // название группы
-    private int year;                       // год существования группы
-    private List<IStudent> students;        // список студентов в группе
+    private NameString mName;               // название группы
+    private int mYear;                       // год существования группы
+    private List<IStudent> mStudents;        // список студентов в группе
 
     public Group(String name, int year) {
-        this.name = new NameString(name);
-        this.year = year;
-        students = new ArrayList<>();
+        this.mName = new NameString(name);
+        this.mYear = year;
+        mStudents = new ArrayList<>();
     }
 
     @Override
     public int hashCode() {
-        int result = 37 + name.hashCode();
-        result = 37 * result + year;
+        int result = 37 + mName.hashCode();
+        result = 37 * result + mYear;
         return result;
     }
 
@@ -31,32 +31,31 @@ public class Group implements IGroup {
         if (obj == null || !(obj instanceof  Group))
             return false;
         Group other = (Group) obj;
-        return name.equals(other.name) && year == other.year;
+        return mName.equals(other.mName) && mYear == other.mYear;
     }
 
     @Override
     public int contains(IStudent student) {
-        return Utils.contains(students, student);
+        return Utils.contains(mStudents, student);
     }
 
     @Override
-    public String getName() {
-        return name.toString();
+    public NameString getName() {
+        return mName;
     }
 
-    @Override
     public int getYear() {
-        return year;
+        return mYear;
     }
 
     @Override
     public int getSize() {
-        return students.size();
+        return mStudents.size();
     }
 
     @Override
     public Iterator<IStudent> iterator() {
-        return students.iterator();
+        return mStudents.iterator();
     }
 
     /**
@@ -69,7 +68,7 @@ public class Group implements IGroup {
         int index = contains(student);
         if (index != -1)
             return false;
-        return students.add(student);
+        return mStudents.add(student);
     }
 
     /**
@@ -79,7 +78,7 @@ public class Group implements IGroup {
         int index = contains(student);
         if (index == -1)
             return false;
-        students.remove(index);
+        mStudents.remove(index);
         return true;
     }
 }

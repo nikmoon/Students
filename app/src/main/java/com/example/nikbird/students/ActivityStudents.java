@@ -1,5 +1,6 @@
 package com.example.nikbird.students;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
@@ -8,7 +9,12 @@ import android.view.MenuItem;
 
 import com.example.nikbird.students.fragments.FragmentStudents;
 
+import nikpack.utils.NameString;
+
 public class ActivityStudents extends AppCompatActivity {
+
+    public static final String EXTRA_GROUP_NAME = "com.example.nikbird.students.ActivityStudents.GROUP_NAME";
+    public static final String EXTRA_GROUP_YEAR = "com.example.nikbird.students.ActivityStudents.GROUP_YEAR";
 
     private FragmentStudents mFragmentStudents;
 
@@ -17,7 +23,22 @@ public class ActivityStudents extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_students);
 
+        Intent intent = getIntent();
+
         mFragmentStudents = (FragmentStudents) getSupportFragmentManager().findFragmentById(R.id.fragmentStudents);
+        filterByGroup(intent.getStringExtra(EXTRA_GROUP_NAME), intent.getIntExtra(EXTRA_GROUP_YEAR, -1));
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+
+        filterByGroup(intent.getStringExtra(EXTRA_GROUP_NAME), intent.getIntExtra(EXTRA_GROUP_YEAR, -1));
+    }
+
+    private void filterByGroup(String groupName, int groupYear) {
+        if (groupName != null && !groupName.equals(""))
+            mFragmentStudents.filterByGroup_Equals(new NameString(groupName), groupYear);
     }
 
     @Override

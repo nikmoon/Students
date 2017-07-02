@@ -17,7 +17,9 @@ import com.example.nikbird.students.managers.ManagerStudents;
 import java.util.ArrayList;
 import java.util.List;
 
+import nikpack.Students.Interfaces.IGroup;
 import nikpack.Students.Interfaces.IStudent;
+import nikpack.utils.NameString;
 
 
 /**
@@ -41,6 +43,16 @@ public class FragmentStudents extends Fragment {
         mViewStudents = view.findViewById(R.id.rvStudents);
         mViewStudents.setAdapter(new AdapterStudents(mStudents));
         return view;
+    }
+
+    public void filterByGroup_Equals(NameString groupName, int groupYear) {
+        List<IStudent> students = new ArrayList<>();
+        for(IStudent student: mStudents) {
+            IGroup group = student.getGroup();
+            if (group.getName().equals(groupName) && (group.getYear() == groupYear))
+                students.add(student);
+        }
+        mViewStudents.setAdapter(new AdapterStudents(students));
     }
 
     public void filterByLastName_Contains(String filter) {

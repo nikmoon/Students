@@ -1,6 +1,7 @@
 package com.example.nikbird.students.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.nikbird.students.ActivityStudents;
 import com.example.nikbird.students.R;
 
 import java.util.List;
@@ -37,17 +39,19 @@ public class AdapterGroups extends RecyclerView.Adapter {
 
         public void bindGroup(IGroup group) {
             mGroup = group;
-            mGroupName.setText(mGroup.getName());
-            mGroupSize.setText(String.valueOf(mGroup.getSize()));
+            mGroupName.setText(mGroup.getName().toString());
+            mGroupName.setOnClickListener(this);
+            mGroupSize.setText(String.valueOf(mGroup.getSize()) + " чел.");
             mGroupYear.setText(String.valueOf(mGroup.getYear()));
         }
 
         @Override
         public void onClick(View view) {
             Context context = view.getContext();
-//            Intent intent = new Intent(context, ActivityStudentProfile.class);
-//            intent.putExtra(AdapterStudents.EXTRA_STUDENT_PASSPORT, student.getPassport());
-//            context.startActivity(intent);
+            Intent intent = new Intent(context, ActivityStudents.class);
+            intent.putExtra(ActivityStudents.EXTRA_GROUP_NAME, mGroup.getName().toString());
+            intent.putExtra(ActivityStudents.EXTRA_GROUP_YEAR, mGroup.getYear());
+            context.startActivity(intent);
         }
     }
 

@@ -51,7 +51,7 @@ public class AdapterStudents extends RecyclerView.Adapter {
             tvFirstName.setText(student.getFirstName());
             btnLastName.setText(student.getLastName());
             tvMiddleName.setText(student.getMiddleName());
-            btnGroupName.setText(student.getGroup().getName());
+            btnGroupName.setText(student.getGroup().getName().toString());
             studentPhoto.setImageResource(student.getPhotoIndex());
             this.student = student;
         }

@@ -33,10 +33,12 @@ public class Main {
         IGroup groupHistory = null;
         IGroup groupFairytale = null;
         IGroup groupRolyPoly = null;
+        IGroup groupTerminator2 = null;
         try {
-            groupHistory = managerGroups.createGroup("Исторические персонажи", 2017);
-            groupFairytale = managerGroups.createGroup("Сказочные персонажи", 2017);
-            groupRolyPoly = managerGroups.createGroup("Из фильма \"Неваляшка\"", 2017);
+            groupHistory = managerGroups.createGroup("Легенды", 2017);
+            groupFairytale = managerGroups.createGroup("Фрики", 2017);
+            groupRolyPoly = managerGroups.createGroup("\"Неваляшка\"", 2017);
+            groupTerminator2 = managerGroups.createGroup("\"Терминатор 2\"", 2017);
         } catch (ManagerGroups.GroupException e) {
             e.printStackTrace();
             throw new RuntimeException();
@@ -82,8 +84,19 @@ public class Main {
                     managerStudents.createStudent(
                             Student.GenderType.FEMALE,
                             "Линда", "Нигматулина", "Талгатовна",
-                            new DayDate(1983, 5, 14), contacts, groupRolyPoly, "7300 123463", R.drawable.linda_nigmatulina)
-
+                            new DayDate(1983, 5, 14), contacts, groupRolyPoly, "7300 123463", R.drawable.linda_nigmatulina),
+                    managerStudents.createStudent(
+                            Student.GenderType.MALE, "Арнольд", "Шварценеггер", "",
+                            new DayDate(1947, 7, 30), contacts, groupTerminator2, "7300 123464", R.drawable.schwarzenegger_1984),
+                    managerStudents.createStudent(
+                            Student.GenderType.MALE, "Роберт", "Патрик", "",
+                            new DayDate(1958, 11, 5), contacts, groupTerminator2, "7300 123465", R.drawable.robert_patrik),
+                    managerStudents.createStudent(
+                            Student.GenderType.FEMALE, "Линда", "Хэмилтон", "Кэрролл",
+                            new DayDate(1956, 9, 26), contacts, groupTerminator2, "7300 123466", R.drawable.linda_hamilton),
+                    managerStudents.createStudent(
+                            Student.GenderType.MALE, "Эдвард", "Фёрлонг", "Уолтер",
+                            new DayDate(1977, 8, 2), contacts, groupTerminator2, "7300 123467", R.drawable.edward_ferlong)
             };
         } catch (ManagerStudents.StudentExistsException e) {
             e.printStackTrace();

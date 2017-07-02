@@ -3,18 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@android:drawable/title_bar">
 
     <Button
         android:id="@+id/btnGroup"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:text="Группа"
         android:textSize="16sp"
-        app:layout_constraintHorizontal_weight="4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_weight="6"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/tvGroupSize"
         app:layout_constraintTop_toTopOf="parent" />
@@ -29,11 +32,11 @@
         android:textAlignment="center"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintTop_toTopOf="@+id/btnGroup"
         app:layout_constraintBottom_toBottomOf="@+id/btnGroup"
+        app:layout_constraintHorizontal_weight="2"
         app:layout_constraintLeft_toRightOf="@+id/btnGroup"
-        app:layout_constraintRight_toRightOf="@+id/tvGroupYear" />
+        app:layout_constraintRight_toRightOf="@+id/tvGroupYear"
+        app:layout_constraintTop_toTopOf="@+id/btnGroup" />
 
     <TextView
         android:id="@+id/tvGroupYear"
@@ -43,13 +46,12 @@
         android:layout_marginRight="0dp"
         android:text="Год"
         android:textAlignment="center"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintTop_toTopOf="@+id/btnGroup"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/btnGroup"
+        app:layout_constraintHorizontal_weight="1"
         app:layout_constraintLeft_toRightOf="@+id/tvGroupSize"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btnGroup" />
 
 
 </android.support.constraint.ConstraintLayout>
