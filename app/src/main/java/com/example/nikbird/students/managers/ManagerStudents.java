@@ -1,6 +1,7 @@
 package com.example.nikbird.students.managers;
 
 import nikpack.Main;
+import nikpack.Students.Interfaces.IGroup;
 import nikpack.Students.Interfaces.IStudent;
 import nikpack.Students.Models.Group;
 import nikpack.Students.Models.Student;
@@ -19,8 +20,6 @@ public class ManagerStudents {
 
     public static ManagerStudents instance = new ManagerStudents();
     public static ManagerStudents getInstance() {
-        if (instance.getCount() == 0)
-            Main.fillManagerStudents(instance);
         return instance;
     }
 
@@ -49,8 +48,9 @@ public class ManagerStudents {
      * @throws StudentExistsException
      * @throws InvalidPassportException
      */
-    public synchronized IStudent createStudent(Student.GenderType gender, String firstName, String lastName, String middleName,
-                                  DayDate birthDate, Contacts contacts, Group group, String passport, int photoIndex)
+    public synchronized IStudent
+    createStudent(Student.GenderType gender, String firstName, String lastName, String middleName,
+                  DayDate birthDate, Contacts contacts, IGroup group, String passport, int photoIndex)
             throws StudentExistsException, InvalidPassportException
     {
         // валидация всех ссылок
@@ -68,6 +68,7 @@ public class ManagerStudents {
 
         // создаем экземпляр студента и добавляем его в общее отображение
         Student student = new Student(gender, firstName, lastName, middleName, birthDate, contacts, group, passport, photoIndex);
+        ManagerGroups.getInstance().setStudentGroup(student, group);
         mapStudents.put(student.getPassport(), student);
         listStudents.add(student);
 

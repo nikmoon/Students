@@ -45,6 +45,16 @@ public class Group implements IGroup {
     }
 
     @Override
+    public int getYear() {
+        return year;
+    }
+
+    @Override
+    public int getSize() {
+        return students.size();
+    }
+
+    @Override
     public Iterator<IStudent> iterator() {
         return students.iterator();
     }

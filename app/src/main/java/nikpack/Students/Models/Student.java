@@ -1,5 +1,6 @@
 package nikpack.Students.Models;
 
+import nikpack.Students.Interfaces.IGroup;
 import nikpack.Students.Interfaces.IStudent;
 import nikpack.utils.Contacts;
 import nikpack.utils.DayDate;
@@ -16,7 +17,7 @@ public class Student implements IStudent, Externalizable {
     private DayDate birthDate;          // дата рождения
 
     private Contacts contacts;          // контакты
-    private Group group;                // группа, в которой числится студент
+    private IGroup group;               // группа, в которой числится студент
     private Status status;              // текущий статус
     private int photoIndex;         // индекс Drawable
 
@@ -46,7 +47,7 @@ public class Student implements IStudent, Externalizable {
      */
     public Student(GenderType gender, String firstName, String lastName,
                    String middleName, DayDate birthDate, Contacts contacts,
-                   Group group, String passport, int photoIndex) {
+                   IGroup group, String passport, int photoIndex) {
         this.gender = gender;
         this.firstName = new NameString(firstName);
         this.lastName = new NameString(lastName);
@@ -108,7 +109,7 @@ public class Student implements IStudent, Externalizable {
 
     @Override
     public String getFullName() {
-        return String.join(" ", getFirstName(), getMiddleName(), getLastName());
+        return getLastName() + " " + getFirstName() + " " + getMiddleName();
     }
 
     @Override
@@ -137,7 +138,7 @@ public class Student implements IStudent, Externalizable {
     }
 
     @Override
-    public Group getGroup() {
+    public IGroup getGroup() {
         return group;
     }
 

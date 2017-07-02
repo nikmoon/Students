@@ -13,17 +13,17 @@ import com.example.nikbird.students.adapters.AdapterStudents;
 
 import com.example.nikbird.students.managers.ManagerStudents;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
 import nikpack.Students.Interfaces.IStudent;
 
+
 /**
  * A simple {@link Fragment} subclass.
  */
 public class FragmentStudents extends Fragment {
-
-    private static final String FILTER_TAG = "com.example.nikbird.students.fragments.FragmentStudents.FILTER";
 
     private RecyclerView mViewStudents;
     private List<IStudent> mStudents;
@@ -37,23 +37,41 @@ public class FragmentStudents extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_students, container, false);
-        mViewStudents = view.findViewById(R.id.vStudents);
-
         mStudents = ManagerStudents.getInstance().getStudents();
+        mViewStudents = view.findViewById(R.id.rvStudents);
+        mViewStudents.setAdapter(new AdapterStudents(mStudents));
         return view;
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-    }
-
-    public void filterByLastName(String filter) {
+    public void filterByLastName_Contains(String filter) {
+        filter = filter.toUpperCase();
         List<IStudent> students = new ArrayList<>();
         for(IStudent student: mStudents) {
-            if (student.getLastName().toLowerCase().startsWith(filter))
+            if (student.getLastName().toUpperCase().contains(filter))
                 students.add(student);
         }
         mViewStudents.setAdapter(new AdapterStudents(students));
     }
+
+    public void filterByLastName_StartsWith(String filter) {
+        filter = filter.toUpperCase();
+        List<IStudent> students = new ArrayList<>();
+        for(IStudent student: mStudents) {
+            if (student.getLastName().toUpperCase().startsWith(filter))
+                students.add(student);
+        }
+        mViewStudents.setAdapter(new AdapterStudents(students));
+    }
+
+
+    public void filterByLastName_Equals(String filter) {
+        filter = filter.toUpperCase();
+        List<IStudent> students = new ArrayList<>();
+        for(IStudent student: mStudents) {
+            if (student.getLastName().toUpperCase().equals(filter))
+                students.add(student);
+        }
+        mViewStudents.setAdapter(new AdapterStudents(students));
+    }
+
 }

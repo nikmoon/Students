@@ -1,4 +1,4 @@
-package com.example.nikbird.students;
+package com.example.nikbird.students.adapters;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -7,12 +7,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.nikbird.students.R;
+
 import nikpack.utils.Contacts;
 
 /**
  * Created by nikbird on 25.06.17.
  */
-public class StudentDetailContactsAdapter extends RecyclerView.Adapter<StudentDetailContactsAdapter.ContactHolder> {
+public class AdapterStudentlContacts extends RecyclerView.Adapter<AdapterStudentlContacts.ContactHolder> {
 
     private Contacts contacts;
     private Contacts.ContactType[] contactTypes;
@@ -38,14 +40,14 @@ public class StudentDetailContactsAdapter extends RecyclerView.Adapter<StudentDe
         }
     }
 
-    public StudentDetailContactsAdapter(Contacts contacts) {
+    public AdapterStudentlContacts(Contacts contacts) {
         this.contacts = contacts;
         contactTypes = contacts.getContactTypes();
     }
 
     @Override
     public ContactHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View inflated = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_row_contact, parent, false);
+        View inflated = LayoutInflater.from(parent.getContext()).inflate(R.layout.rvrow_student_contact, parent, false);
         return new ContactHolder(inflated);
     }
 

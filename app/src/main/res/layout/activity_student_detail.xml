@@ -18,7 +18,7 @@
             android:id="@+id/layoutStudentDetail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context="com.example.nikbird.students.StudentDetailActivity">
+            tools:context="com.example.nikbird.students.ActivityStudentProfile">
 
             <TextView
                 android:id="@+id/tvLastName"

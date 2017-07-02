@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class LoginActivity extends AppCompatActivity{
+public class ActivityLogin extends AppCompatActivity{
 
     private Button buttonLogin;
     private Button buttonRegistration;
@@ -17,7 +17,7 @@ public class LoginActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
 
         buttonLogin = (Button) findViewById(R.id.btnLoginTry);
         buttonRegistration = (Button) findViewById(R.id.btnRegistration);
@@ -27,24 +27,24 @@ public class LoginActivity extends AppCompatActivity{
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String login = editTextLogin.getText().toString();
-                String password = editTextPassword.getText().toString();
-                if (authenticated(login, password)) {
-//                    Intent intent = new Intent(view.getContext(), SelectionActivity.class);
-                    Intent intent = new Intent(view.getContext(), ActivityLists.class);
-                    startActivity(intent);
-                }
+            String login = editTextLogin.getText().toString();
+            String password = editTextPassword.getText().toString();
+            if (authenticated(login, password)) {
+                Intent intent = new Intent(view.getContext(), ActivityLists.class);
+                startActivity(intent);
+            }
             }
         });
 
         buttonRegistration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), RegistrationActivity.class);
-                startActivity(intent);
+            Intent intent = new Intent(view.getContext(), ActivityRegistration.class);
+            startActivity(intent);
             }
         });
     }
+
 
     /**
      * Проверка данных, введенных пользователей

@@ -7,5 +7,7 @@ package nikpack.Students.Interfaces;
 
 public interface IGroup extends Iterable<IStudent> {
     String getName();
+    int getYear();
+    int getSize();
     int contains(IStudent student);
 }

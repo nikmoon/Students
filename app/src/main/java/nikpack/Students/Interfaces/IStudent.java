@@ -17,7 +17,7 @@ public interface IStudent {
     String getMiddleName();
     DayDate getBirthDate();
     Contacts getContacts();
-    Group getGroup();
+    IGroup getGroup();
     Student.Status getStatus();
     String getPassport();
     int getPhotoIndex();

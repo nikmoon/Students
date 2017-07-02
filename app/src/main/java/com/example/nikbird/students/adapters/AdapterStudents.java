@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.nikbird.students.R;
-import com.example.nikbird.students.StudentDetailActivity;
+import com.example.nikbird.students.ActivityStudentProfile;
 
 import java.util.List;
 
@@ -25,8 +25,6 @@ public class AdapterStudents extends RecyclerView.Adapter {
     public static final String EXTRA_STUDENT_PASSPORT = "com.example.nikbird.students.adapters.AdapterStudents.PASSPORT";
 
     private List<? extends IStudent> students;
-
-    private String filterLastName;
 
     public static class StudentHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private ImageView studentPhoto;
@@ -61,7 +59,7 @@ public class AdapterStudents extends RecyclerView.Adapter {
         @Override
         public void onClick(View view) {
             Context context = view.getContext();
-            Intent intent = new Intent(context, StudentDetailActivity.class);
+            Intent intent = new Intent(context, ActivityStudentProfile.class);
             intent.putExtra(AdapterStudents.EXTRA_STUDENT_PASSPORT, student.getPassport());
             context.startActivity(intent);
         }
@@ -69,13 +67,12 @@ public class AdapterStudents extends RecyclerView.Adapter {
 
     public AdapterStudents(List<? extends IStudent> students) {
         this.students = students;
-        filterLastName = null;
     }
 
     @Override
-    public AdapterStudents.StudentHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public StudentHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View inflated = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.recycler_row, parent, false);
+                .inflate(R.layout.rvrow_student, parent, false);
         return new AdapterStudents.StudentHolder(inflated);
     }
 
@@ -89,17 +86,4 @@ public class AdapterStudents extends RecyclerView.Adapter {
         return students.size();
     }
 
-//    public void filter(String filter) {
-//        // чтобы не делать много лишней ненужной работы при повороте экрана
-//        if (!filter.equals(filterLastName)) {
-//            filterLastName = filter;
-//
-//            if (filter.equals(""))
-//                students = ManagerStudents.getInstance().getStudents(null);
-//            else {
-//                students = ManagerStudents.getInstance().getFilteredList(filter);
-//            }
-//            notifyDataSetChanged();
-//        }
-//    }
 }

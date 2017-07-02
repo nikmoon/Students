@@ -2,11 +2,15 @@ package nikpack;
 
 import com.example.nikbird.students.R;
 
+import nikpack.Students.Interfaces.IGroup;
 import nikpack.Students.Interfaces.IStudent;
+
+import com.example.nikbird.students.managers.ManagerGroups;
 import com.example.nikbird.students.managers.ManagerStudents;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import nikpack.Students.Models.Group;
 import nikpack.Students.Models.Student;
@@ -18,12 +22,25 @@ public class Main {
     public static void main(String[] args) {
     }
 
+    public static void fillManagers() {
 
-    public static void fillManagerStudents(ManagerStudents managerStudents) {
+        ManagerStudents managerStudents = ManagerStudents.getInstance();
+        if (managerStudents.getCount() != 0)
+            return;
 
-        Group groupHistory = new Group("Исторические персонажи", 2017);
-        Group groupFairytale = new Group("Сказочные персонажи", 2017);
-        Group groupRolyPoly = new Group("Из фильма \"Неваляшка\"", 2017);
+        ManagerGroups managerGroups = ManagerGroups.getInstance();
+
+        IGroup groupHistory = null;
+        IGroup groupFairytale = null;
+        IGroup groupRolyPoly = null;
+        try {
+            groupHistory = managerGroups.createGroup("Исторические персонажи", 2017);
+            groupFairytale = managerGroups.createGroup("Сказочные персонажи", 2017);
+            groupRolyPoly = managerGroups.createGroup("Из фильма \"Неваляшка\"", 2017);
+        } catch (ManagerGroups.GroupException e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
 
         Contacts contacts = new Contacts();
         contacts.add(Contacts.ContactType.ADDRESS, "Домашний адрес студента");
@@ -31,7 +48,6 @@ public class Main {
         contacts.add(Contacts.ContactType.SKYPE, "studentsSkype");
         contacts.add(Contacts.ContactType.VK, "http://vk.ru/StudentsVK");
         contacts.add(Contacts.ContactType.TELEGRAM, "@StudentTelegram");
-
 
         try {
             IStudent[] students = new IStudent[] {

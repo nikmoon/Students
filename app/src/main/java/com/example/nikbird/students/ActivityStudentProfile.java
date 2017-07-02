@@ -6,12 +6,13 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.nikbird.students.adapters.AdapterStudentlContacts;
 import com.example.nikbird.students.adapters.AdapterStudents;
 
 import nikpack.Students.Interfaces.IStudent;
 import com.example.nikbird.students.managers.ManagerStudents;
 
-public class StudentDetailActivity extends AppCompatActivity {
+public class ActivityStudentProfile extends AppCompatActivity {
 
     private RecyclerView contactsView;
     private RecyclerView journalsView;
@@ -47,6 +48,6 @@ public class StudentDetailActivity extends AppCompatActivity {
         ivStudentPhoto.setImageResource(student.getPhotoIndex());
 
         contactsView = (RecyclerView) findViewById(R.id.recvContacts);
-        contactsView.setAdapter(new StudentDetailContactsAdapter(student.getContacts()));
+        contactsView.setAdapter(new AdapterStudentlContacts(student.getContacts()));
     }
 }
