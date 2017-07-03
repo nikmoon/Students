@@ -18,9 +18,12 @@ import java.util.Map;
  */
 public class ManagerStudents {
 
-    public static ManagerStudents instance = new ManagerStudents();
+    public static class SingletonHolder {
+        public static final ManagerStudents HOLDER_INSTANCE = new ManagerStudents();
+    }
+
     public static ManagerStudents getInstance() {
-        return instance;
+        return SingletonHolder.HOLDER_INSTANCE;
     }
 
     private Map<String, Student> mapStudents;          // множество всех студентов
