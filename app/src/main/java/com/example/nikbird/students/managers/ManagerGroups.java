@@ -17,16 +17,18 @@ import java.util.Set;
  */
 public class ManagerGroups {
 
-    public static ManagerGroups instance = new ManagerGroups();
-    public static ManagerGroups getInstance() {
-        return instance;
+    public static class SingletonHolder {
+        public static final ManagerGroups HOLDER_INSTANCE = new ManagerGroups();
     }
 
+    public static ManagerGroups getInstance() {
+        return SingletonHolder.HOLDER_INSTANCE;
+    }
 
     private Set<Group> mGroups;
     private List<Group> mListGroups;
 
-    public ManagerGroups() {
+    private ManagerGroups() {
         mGroups = new HashSet<>();
         mListGroups = new ArrayList<>();
     }
