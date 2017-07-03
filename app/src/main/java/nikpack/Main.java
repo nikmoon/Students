@@ -1,5 +1,7 @@
 package nikpack;
 
+import android.net.Uri;
+
 import com.example.nikbird.students.R;
 
 import nikpack.Students.Interfaces.IGroup;
@@ -50,6 +52,7 @@ public class Main {
         contacts.add(Contacts.ContactType.SKYPE, "studentsSkype");
         contacts.add(Contacts.ContactType.VK, "http://vk.ru/StudentsVK");
         contacts.add(Contacts.ContactType.TELEGRAM, "@StudentTelegram");
+        contacts.add(Contacts.ContactType.PHONE, "*105" + Uri.encode("#"));
 
         try {
             IStudent[] students = new IStudent[] {

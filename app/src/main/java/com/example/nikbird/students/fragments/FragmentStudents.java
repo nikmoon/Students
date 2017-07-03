@@ -1,10 +1,14 @@
 package com.example.nikbird.students.fragments;
 
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -19,6 +23,7 @@ import java.util.List;
 
 import nikpack.Students.Interfaces.IGroup;
 import nikpack.Students.Interfaces.IStudent;
+import nikpack.utils.Contacts;
 import nikpack.utils.NameString;
 
 
@@ -28,7 +33,7 @@ import nikpack.utils.NameString;
 public class FragmentStudents extends Fragment {
 
     private RecyclerView mViewStudents;
-    private List<IStudent> mStudents;
+    private volatile List<IStudent> mStudents;
 
     public FragmentStudents() {
         // Required empty public constructor
@@ -45,45 +50,39 @@ public class FragmentStudents extends Fragment {
         return view;
     }
 
-    public void filterByGroup_Equals(NameString groupName, int groupYear) {
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        IStudent student = ((AdapterStudents)mViewStudents.getAdapter()).getContextMenuFor();
+        Intent intent = new Intent(Intent.ACTION_CALL);
+        intent.setData(Uri.parse("tel:" + student.getContacts().get(Contacts.ContactType.PHONE)));
+        if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+            startActivity(intent);
+        }
+        return true;
+    }
+
+    public void filterByGroup_Permanent(NameString groupName, int groupYear) {
         List<IStudent> students = new ArrayList<>();
-        for(IStudent student: mStudents) {
+        for(IStudent student: ManagerStudents.getInstance().getStudents()) {
             IGroup group = student.getGroup();
             if (group.getName().equals(groupName) && (group.getYear() == groupYear))
                 students.add(student);
         }
-        mViewStudents.setAdapter(new AdapterStudents(students));
-    }
-
-    public void filterByLastName_Contains(String filter) {
-        filter = filter.toUpperCase();
-        List<IStudent> students = new ArrayList<>();
-        for(IStudent student: mStudents) {
-            if (student.getLastName().toUpperCase().contains(filter))
-                students.add(student);
+        synchronized (mStudents) {
+            mStudents = students;
         }
-        mViewStudents.setAdapter(new AdapterStudents(students));
+        mViewStudents.setAdapter(new AdapterStudents(mStudents));
     }
 
     public void filterByLastName_StartsWith(String filter) {
         filter = filter.toUpperCase();
         List<IStudent> students = new ArrayList<>();
-        for(IStudent student: mStudents) {
+        List<IStudent> current = mStudents;
+        for(IStudent student: current) {
             if (student.getLastName().toUpperCase().startsWith(filter))
                 students.add(student);
         }
         mViewStudents.setAdapter(new AdapterStudents(students));
     }
-
-
-    public void filterByLastName_Equals(String filter) {
-        filter = filter.toUpperCase();
-        List<IStudent> students = new ArrayList<>();
-        for(IStudent student: mStudents) {
-            if (student.getLastName().toUpperCase().equals(filter))
-                students.add(student);
-        }
-        mViewStudents.setAdapter(new AdapterStudents(students));
-    }
-
 }

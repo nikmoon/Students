@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.nikbird.students.fragments.FragmentStudents;
 
@@ -38,7 +40,7 @@ public class ActivityStudents extends AppCompatActivity {
 
     private void filterByGroup(String groupName, int groupYear) {
         if (groupName != null && !groupName.equals(""))
-            mFragmentStudents.filterByGroup_Equals(new NameString(groupName), groupYear);
+            mFragmentStudents.filterByGroup_Permanent(new NameString(groupName), groupYear);
     }
 
     @Override
