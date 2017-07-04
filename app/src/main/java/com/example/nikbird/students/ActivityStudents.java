@@ -4,10 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
-import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.example.nikbird.students.fragments.FragmentStudents;
 
@@ -25,22 +23,20 @@ public class ActivityStudents extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_students);
 
-        Intent intent = getIntent();
-
         mFragmentStudents = (FragmentStudents) getSupportFragmentManager().findFragmentById(R.id.fragmentStudents);
-        filterByGroup(intent.getStringExtra(EXTRA_GROUP_NAME), intent.getIntExtra(EXTRA_GROUP_YEAR, -1));
+        filterByGroup(getIntent());
     }
 
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-
-        filterByGroup(intent.getStringExtra(EXTRA_GROUP_NAME), intent.getIntExtra(EXTRA_GROUP_YEAR, -1));
+        filterByGroup(intent);
     }
 
-    private void filterByGroup(String groupName, int groupYear) {
-        if (groupName != null && !groupName.equals(""))
-            mFragmentStudents.filterByGroup_Permanent(new NameString(groupName), groupYear);
+    private void filterByGroup(Intent intent) {
+        String groupName = intent.getStringExtra(EXTRA_GROUP_NAME);
+        if (groupName != null)
+            mFragmentStudents.filterByGroup_Permanent(new NameString(groupName), intent.getIntExtra(EXTRA_GROUP_YEAR, -1));
     }
 
     @Override

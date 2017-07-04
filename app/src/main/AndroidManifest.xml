@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.nikbird.students">
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
+
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
@@ -18,13 +19,15 @@
             </intent-filter>
         </activity>
         <activity android:name=".ActivityLists" />
-        <activity android:name=".ActivityStudents"
-            android:launchMode="singleTask"/>
-        <activity android:name=".ActivityGroups"
-            android:launchMode="singleTask"/>
+        <activity
+            android:name=".ActivityStudents"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".ActivityGroups"
+            android:launchMode="singleTask" />
         <activity android:name=".ActivityRegistration" />
         <activity android:name=".ActivityStudentProfile" />
-
+        <activity android:name=".ActivityLessons"></activity>
     </application>
 
 </manifest>

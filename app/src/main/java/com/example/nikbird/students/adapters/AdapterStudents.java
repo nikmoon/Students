@@ -118,7 +118,7 @@ public class AdapterStudents extends RecyclerView.Adapter {
     public StudentHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View inflated = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.rvrow_student, parent, false);
-        return new AdapterStudents.StudentHolder(inflated);
+        return new StudentHolder(inflated);
     }
 
     @Override

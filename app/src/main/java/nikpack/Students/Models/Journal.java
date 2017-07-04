@@ -13,61 +13,57 @@ import java.util.List;
  */
 public class Journal implements IJournal {
 
-    private Lesson lesson;
-    private IStudent[] mustbeArray;
-    private boolean[] wasonArray;
+    private ILesson mLesson;
+    private IStudent[] mStudents;
+    private boolean[] mPresence;
 
     public Journal(Lesson lesson) {
-        this.lesson = lesson;
+        this.mLesson = lesson;
     }
 
     @Override
     public int hashCode() {
-        return lesson.hashCode();
+        return mLesson.hashCode();
     }
 
     @Override
     public boolean equals(Object obj) {
-        return lesson.equals(obj);
+        return mLesson.equals(obj);
     }
 
     @Override
     public ILesson getLesson() {
-        return lesson;
+        return mLesson;
     }
 
     @Override
     public int contains(IStudent student) {
-        return Utils.contains(mustbeArray, student);
+        return Utils.contains(mStudents, student);
     }
 
     @Override
     public boolean wasOnLesson(IStudent student) {
         int index = contains(student);
         if (index != -1)
-            return wasonArray[index];
+            return mPresence[index];
         return false;
     }
 
     @Override
     public boolean wasOnLesson(int index) {
-        return wasonArray[index];
+        return mPresence[index];
     }
 
-    public void setLesson(Lesson lesson) {
-        this.lesson = lesson;
+    public void setStudents(List<IStudent> students) {
+        mStudents = students.toArray(new IStudent[students.size()]);
+        mPresence = new boolean[mStudents.length];
     }
 
-    public void setMustBe(List<IStudent> students) {
-        mustbeArray = (IStudent[]) students.toArray();
-        wasonArray = new boolean[mustbeArray.length];
-    }
-
-    public int setWasOn(IStudent student) {
+    public int setPresence(IStudent student) {
         int index = contains(student);
         if (index == -1)
             return -1;
-        wasonArray[index] = true;
+        mPresence[index] = true;
         return index;
     }
 }

@@ -5,9 +5,11 @@ import android.net.Uri;
 import com.example.nikbird.students.R;
 
 import nikpack.Students.Interfaces.IGroup;
+import nikpack.Students.Interfaces.ILesson;
 import nikpack.Students.Interfaces.IStudent;
 
 import com.example.nikbird.students.managers.ManagerGroups;
+import com.example.nikbird.students.managers.ManagerLessons;
 import com.example.nikbird.students.managers.ManagerStudents;
 
 import java.util.ArrayList;
@@ -15,9 +17,12 @@ import java.util.List;
 import java.util.Set;
 
 import nikpack.Students.Models.Group;
+import nikpack.Students.Models.Lesson;
 import nikpack.Students.Models.Student;
 import nikpack.utils.Contacts;
 import nikpack.utils.DayDate;
+import nikpack.utils.DayTime;
+import nikpack.utils.NameString;
 
 public class Main {
 
@@ -56,49 +61,29 @@ public class Main {
 
         try {
             IStudent[] students = new IStudent[] {
-                    managerStudents.createStudent(
-                            Student.GenderType.MALE,
-                            "Григорий", "Распутин", "Ефимович",
+                    managerStudents.createStudent(Student.GenderType.MALE, "Григорий", "Распутин", "Ефимович",
                             new DayDate(1869, 1, 21), contacts, groupHistory, "7300 123456", R.drawable.grigori_rasputin_1916),
-                    managerStudents.createStudent(
-                            Student.GenderType.MALE,
-                            "Александр", "Бородач", "Родионович",
+                    managerStudents.createStudent(Student.GenderType.MALE, "Александр", "Бородач", "Родионович",
                             new DayDate(1985, 12, 1), contacts, groupFairytale, "7300 123457", R.drawable.borodach),
-                    managerStudents.createStudent(
-                            Student.GenderType.FEMALE,
-                            "Вера", "Брежнева", "Викторовна",
+                    managerStudents.createStudent(Student.GenderType.FEMALE, "Вера", "Брежнева", "Викторовна",
                             new DayDate(1982, 2, 3), contacts, groupRolyPoly, "7300 123458", R.drawable.vera_brejneva),
-                    managerStudents.createStudent(
-                            Student.GenderType.MALE,
-                            "Константин","Меладзе", "Шотаевич",
+                    managerStudents.createStudent(Student.GenderType.MALE, "Константин","Меладзе", "Шотаевич",
                             new DayDate(1963, 5, 11), contacts, groupRolyPoly, "7300 123459", R.drawable.meladze),
-                    managerStudents.createStudent(
-                            Student.GenderType.MALE,
-                            "Павел", "Деревянко", "Юрьевич",
+                    managerStudents.createStudent(Student.GenderType.MALE, "Павел", "Деревянко", "Юрьевич",
                             new DayDate(1976, 7, 2), contacts, groupRolyPoly, "7300 123460", R.drawable.derevyanko),
-                    managerStudents.createStudent(
-                            Student.GenderType.MALE,
-                            "Сергей", "Маковецкий", "Васильевич",
+                    managerStudents.createStudent(Student.GenderType.MALE, "Сергей", "Маковецкий", "Васильевич",
                             new DayDate(1958, 6, 13), contacts, groupRolyPoly, "7300 123461", R.drawable.makovetskiy_vodka),
-                    managerStudents.createStudent(
-                            Student.GenderType.FEMALE,
-                            "Елена", "Николаева", "Андреевна",
+                    managerStudents.createStudent(Student.GenderType.FEMALE, "Елена", "Николаева", "Андреевна",
                             new DayDate(1983, 2, 9), contacts, groupRolyPoly, "7300 123462", R.drawable.elena_nikolaeva),
-                    managerStudents.createStudent(
-                            Student.GenderType.FEMALE,
-                            "Линда", "Нигматулина", "Талгатовна",
+                    managerStudents.createStudent(Student.GenderType.FEMALE, "Линда", "Нигматулина", "Талгатовна",
                             new DayDate(1983, 5, 14), contacts, groupRolyPoly, "7300 123463", R.drawable.linda_nigmatulina),
-                    managerStudents.createStudent(
-                            Student.GenderType.MALE, "Арнольд", "Шварценеггер", "",
+                    managerStudents.createStudent(Student.GenderType.MALE, "Арнольд", "Шварценеггер", "",
                             new DayDate(1947, 7, 30), contacts, groupTerminator2, "7300 123464", R.drawable.schwarzenegger_1984),
-                    managerStudents.createStudent(
-                            Student.GenderType.MALE, "Роберт", "Патрик", "",
+                    managerStudents.createStudent(Student.GenderType.MALE, "Роберт", "Патрик", "",
                             new DayDate(1958, 11, 5), contacts, groupTerminator2, "7300 123465", R.drawable.robert_patrik),
-                    managerStudents.createStudent(
-                            Student.GenderType.FEMALE, "Линда", "Хэмилтон", "Кэрролл",
+                    managerStudents.createStudent(Student.GenderType.FEMALE, "Линда", "Хэмилтон", "Кэрролл",
                             new DayDate(1956, 9, 26), contacts, groupTerminator2, "7300 123466", R.drawable.linda_hamilton),
-                    managerStudents.createStudent(
-                            Student.GenderType.MALE, "Эдвард", "Фёрлонг", "Уолтер",
+                    managerStudents.createStudent(Student.GenderType.MALE, "Эдвард", "Фёрлонг", "Уолтер",
                             new DayDate(1977, 8, 2), contacts, groupTerminator2, "7300 123467", R.drawable.edward_ferlong)
             };
         } catch (ManagerStudents.StudentExistsException e) {
@@ -108,6 +93,32 @@ public class Main {
             e.printStackTrace();
             return;
         }
+
+        ManagerLessons managerLessons = ManagerLessons.getInstance();
+
+        ILesson lesson = managerLessons.createLesson(Lesson.LessonType.LECTURE, Lesson.LessonSubject.PHYSICS,
+                new NameString("Динамика"), new NameString("Коперник"), new DayTime(2017, 7, 5, 8, 0), 4);
+        managerLessons.setStudents(lesson, groupRolyPoly, groupFairytale, groupHistory, groupTerminator2);
+        managerLessons.setPresence(groupFairytale.getStudent(0), lesson);
+
+        lesson = managerLessons.createLesson(Lesson.LessonType.LECTURE, Lesson.LessonSubject.PHYSICS,
+                new NameString("Статика"), new NameString("Коперник"), new DayTime(2017, 7, 6, 8, 0), 4);
+        managerLessons.setStudents(lesson, groupRolyPoly, groupFairytale, groupHistory, groupTerminator2);
+        managerLessons.setPresence(groupRolyPoly.getStudent(0), lesson);
+        managerLessons.setPresence(groupRolyPoly.getStudent(1), lesson);
+        managerLessons.setPresence(groupRolyPoly.getStudent(2), lesson);
+        managerLessons.setPresence(groupTerminator2.getStudent(2), lesson);
+        managerLessons.setPresence(groupTerminator2.getStudent(3), lesson);
+
+        lesson = managerLessons.createLesson(Lesson.LessonType.LECTURE, Lesson.LessonSubject.MATHEMATICS,
+                new NameString("Дифференцирование"), new NameString("Ломоносов"), new DayTime(2017, 7, 7, 8, 0), 4);
+        managerLessons.setStudents(lesson, groupRolyPoly, groupFairytale, groupHistory, groupTerminator2);
+        managerLessons.setPresence(groupRolyPoly.getStudent(0), lesson);
+        managerLessons.setPresence(groupRolyPoly.getStudent(1), lesson);
+        managerLessons.setPresence(groupRolyPoly.getStudent(2), lesson);
+        managerLessons.setPresence(groupTerminator2.getStudent(2), lesson);
+        managerLessons.setPresence(groupTerminator2.getStudent(3), lesson);
+        managerLessons.setPresence(groupHistory.getStudent(0), lesson);
     }
 
 }

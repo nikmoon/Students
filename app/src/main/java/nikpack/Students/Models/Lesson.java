@@ -1,9 +1,12 @@
 package nikpack.Students.Models;
 
-import nikpack.Students.Interfaces.ILesson;
-import nikpack.utils.NameString;
+import java.util.List;
 
-import java.util.Date;
+import nikpack.Students.Interfaces.IJournal;
+import nikpack.Students.Interfaces.ILesson;
+import nikpack.Students.Interfaces.IStudent;
+import nikpack.utils.DayTime;
+import nikpack.utils.NameString;
 
 /**
  * Created by sa on 08.06.17.
@@ -16,8 +19,9 @@ public class Lesson implements ILesson {
     private LessonSubject subject;      // название предмета
     private NameString theme;               // тема занятия
     private NameString teacher;             // преподаватель
-    private Date date;                  // дата занятия
+    private DayTime date;           // дата занятия
     private int length;             // продолжительность в минутах
+    private Journal mJournal;       // журнал для лекции
 
 
     /**
@@ -36,25 +40,26 @@ public class Lesson implements ILesson {
         MATHEMATICS("Математика"),
         PHYSICS("Физика");
 
-        private String name;
+        private String mName;
 
         LessonSubject(String name) {
-            this.name = name;
+            this.mName = name;
         }
 
         @Override
         public String toString() {
-            return name;
+            return mName;
         }
     }
 
-    public Lesson(LessonType type, LessonSubject subject, NameString theme, NameString teacher, Date date, int length) {
+    public Lesson(LessonType type, LessonSubject subject, NameString theme, NameString teacher, DayTime date, int length) {
         this.type = type;
         this.subject = subject;
         this.theme = theme;
         this.teacher = teacher;
         this.date = date;
         this.length = length;
+        mJournal = new Journal(this);
     }
 
     @Override
@@ -93,14 +98,28 @@ public class Lesson implements ILesson {
     }
 
     @Override
-    public Date getDate() {
-        return new Date(date.getTime());
+    public DayTime getDate() {
+        return date;
     }
 
     @Override
     public int getLength() {
         return length;
     }
+
+    @Override
+    public IJournal getJournal() {
+        return mJournal;
+    }
+
+    public void setStudents(List<IStudent> students) {
+        mJournal.setStudents(students);
+    }
+
+    public int setPresence(IStudent student) {
+        return mJournal.setPresence(student);
+    }
+
 
     public void setType(LessonType type) {
         this.type = type;
@@ -118,8 +137,8 @@ public class Lesson implements ILesson {
         this.teacher = new NameString(teacher);
     }
 
-    public void setDate(Date date) {
-        this.date = new Date(date.getTime());
+    public void setDate(DayTime date) {
+        this.date = date;
     }
 
     public void setLength(int length) {

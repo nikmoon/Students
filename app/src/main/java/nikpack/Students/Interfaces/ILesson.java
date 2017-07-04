@@ -1,6 +1,7 @@
 package nikpack.Students.Interfaces;
 
 import nikpack.Students.Models.Lesson;
+import nikpack.utils.DayTime;
 
 import java.util.Date;
 
@@ -12,6 +13,7 @@ public interface ILesson {
     Lesson.LessonSubject getSubject();
     String getTheme();
     String getTeacher();
-    Date getDate();
+    DayTime getDate();
     int getLength();
+    IJournal getJournal();
 }

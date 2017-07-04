@@ -30,7 +30,7 @@ public class ActivityLists extends AppCompatActivity {
     }
 
     public void onClickLessons(View view) {
-
+        startActivity(new Intent(this, ActivityLessons.class));
     }
 
     private boolean isLandscape() {

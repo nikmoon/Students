@@ -35,6 +35,13 @@ public class Group implements IGroup {
     }
 
     @Override
+    public IStudent getStudent(int index) {
+        if (index < 0 || index >= mStudents.size())
+            return null;
+        return mStudents.get(index);
+    }
+
+    @Override
     public int contains(IStudent student) {
         return Utils.contains(mStudents, student);
     }
