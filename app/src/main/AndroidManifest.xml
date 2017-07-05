@@ -21,13 +21,17 @@
         <activity android:name=".ActivityLists" />
         <activity
             android:name=".ActivityStudents"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:taskAffinity=".students"
+            >
+        </activity>
         <activity
             android:name=".ActivityGroups"
             android:launchMode="singleTask" />
         <activity android:name=".ActivityRegistration" />
         <activity android:name=".ActivityStudentProfile" />
-        <activity android:name=".ActivityLessons"></activity>
+        <activity android:name=".ActivityLessons" />
+        <activity android:name=".ActivityTestId"></activity>
     </application>
 
 </manifest>

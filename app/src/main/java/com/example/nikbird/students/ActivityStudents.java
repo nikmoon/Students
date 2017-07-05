@@ -11,7 +11,7 @@ import com.example.nikbird.students.fragments.FragmentStudents;
 
 import nikpack.utils.NameString;
 
-public class ActivityStudents extends AppCompatActivity {
+public class ActivityStudents extends ActivityTestId {
 
     public static final String EXTRA_GROUP_NAME = "com.example.nikbird.students.ActivityStudents.GROUP_NAME";
     public static final String EXTRA_GROUP_YEAR = "com.example.nikbird.students.ActivityStudents.GROUP_YEAR";
@@ -31,6 +31,11 @@ public class ActivityStudents extends AppCompatActivity {
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         filterByGroup(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
     }
 
     private void filterByGroup(Intent intent) {

@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class ActivityLogin extends AppCompatActivity{
+public class ActivityLogin extends ActivityTestId{
 
     private Button buttonLogin;
     private Button buttonRegistration;

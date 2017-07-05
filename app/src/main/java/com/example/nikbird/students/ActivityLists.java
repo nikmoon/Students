@@ -10,7 +10,7 @@ import android.view.View;
 import nikpack.Main;
 
 
-public class ActivityLists extends AppCompatActivity {
+public class ActivityLists extends ActivityTestId {
 
 
     @Override
