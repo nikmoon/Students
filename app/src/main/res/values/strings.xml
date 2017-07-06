@@ -3,4 +3,14 @@
     <string name="students">Students</string>
     <string name="groups">Groups</string>
     <string name="lessons">Lessons</string>
+    <string name="pref_keep_login_title">Keep Login</string>
+    <string name="pref_keep_login_summary">"Keep login in app"</string>
+    <string name="pref_keep_pass_summary">Keep password in app</string>
+    <string name="pref_keep_pass_title">Keep password</string>
+    <string name="pref_greeting_text_title">Greeting text</string>
+    <string name="pref_greeting_text_summary">Freeting text</string>
+
+    <string-array name="languages">
+
+    </string-array>
 </resources>

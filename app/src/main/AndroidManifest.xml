@@ -27,7 +27,8 @@
             android:launchMode="singleTask" />
         <activity android:name=".ActivityRegistration" />
         <activity android:name=".ActivityStudentProfile" />
-        <activity android:name=".ActivityLessons"></activity>
+        <activity android:name=".ActivityLessons" />
+        <activity android:name=".ActivityPreferences"></activity>
     </application>
 
 </manifest>

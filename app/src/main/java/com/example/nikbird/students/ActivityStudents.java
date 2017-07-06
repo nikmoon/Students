@@ -59,4 +59,15 @@ public class ActivityStudents extends AppCompatActivity {
         });
         return true;
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.preferences: {
+                startActivity(new Intent(this, ActivityPreferences.class));
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

@@ -9,4 +9,10 @@
         android:title="Search"
         app:showAsAction="always"/>
 
+    <item
+        android:id="@+id/preferences"
+        android:title="Настройки"
+        app:showAsAction="never"
+        />
+
 </menu>

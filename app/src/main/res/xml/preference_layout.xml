@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <CheckBoxPreference
+        android:key="keep_login"
+        android:title="@string/pref_keep_login_title"
+        android:summary="@string/pref_keep_login_summary"
+        >
+    </CheckBoxPreference>
+
+    <CheckBoxPreference
+        android:key="keep_password"
+        android:title="@string/pref_keep_pass_title"
+        android:summary="@string/pref_keep_pass_summary"
+        >
+    </CheckBoxPreference>
+
+    <EditTextPreference
+        android:key="greeting_text"
+        android:title="@string/pref_greeting_text_title"
+        android:summary="@string/pref_greeting_text_summary"
+        >
+    </EditTextPreference>
+
+    <ListPreference
+        android:key="language_preference"
+        android:title="save_language_title"
+        android:entries="@array/languages"
+        android:entryValues="@array/languages">
+
+    </ListPreference>
+</PreferenceScreen>
